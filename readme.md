@@ -1,4 +1,4 @@
-# ChatGPT Chrome Extension
+# SlickRemix: ChatGPT Chrome Extension Web Assistant
 
 A Chrome extension that adds a customized version of [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
 
