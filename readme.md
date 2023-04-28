@@ -1,5 +1,7 @@
 # SlickRemix: ChatGPT Chrome Extension Web Assistant
 
+![440x280.png](screenshots%2F440x280.png)
+
 A Chrome extension that adds a customized version of [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
 
 Pin it to your browser so you can easily use it on any website. No need to switch between tabs.
@@ -9,6 +11,16 @@ Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Te
 You will need to add your own [API Key](https://platform.openai.com/account/api-keys). Setup is really simple, and if you don't already have an account with OpenAI, you will receive a free credit of $18 US dollars.
 
 More options coming very soon.
+
+![Screenshot 1.png](screenshots%2FScreenshot%201.png)
+
+![Screenshot 2.png](screenshots%2FScreenshot%202.png)
+
+![Screenshot 3.png](screenshots%2FScreenshot%203.png)
+
+![Screenshot 4.png](screenshots%2FScreenshot%204.png)
+
+![Screenshot 5.png](screenshots%2FScreenshot%205.png)
 
 ## Install
 
