@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="layout/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="layout/css/popup.css" media="all">
+</head>
+<body>
+<script src="layout/js/materialize.min.js"></script>
+<script src="layout/js/popup.js"></script>
+
+<div class="container">
+    <div class="header">Your Personal Automated Assistant</div>
+    <div class="tab">
+        <button class="tablinks active" data-tab="suggestions-tab">Suggestions</button>
+        <button class="tablinks" data-tab="settings-tab">Settings</button>
+    </div>
+    <div id="suggestions-tab" class="tabcontent">
+        <div class="content">
+            <textarea id="input-text" rows="5" placeholder="Type your text here...">Is this working?</textarea>
+            <button id="submit-button" class="submit-button-suggestions">Get Suggestions</button>
+            <button id="clear-button" class="submit-button-suggestions">Clear</button>
+            <div id="suggestions-container"></div>
+        </div>
+    </div>
+    <div id="settings-tab" class="tabcontent">
+        <div class="content">
+            <form id="settings-form">
+
+                <label for="api-key">
+                    <div class="info-icon material-icons tooltipped" data-tooltip="Your OpenAI API key is required to access chatGPT. Click the API Key link to get yours. You must have an account setup. OpenAI gives you $18 free to start, after that you will need to add payment method to continue use.">info</div>
+                    <a href="https://platform.openai.com/account/api-keys" target="_blank">API Key</a>
+                </label>
+                <input type="text" id="api-key" name="api-key">
+
+                <label for="max-tokens">
+                    <div class="info-icon material-icons tooltipped" data-tooltip="The maximum number of tokens (words or word pieces) in the generated text.">info</div>
+                    Max Tokens
+                </label>
+                <input type="text" id="max-tokens" name="max-tokens" placeholder="250">
+
+                <label for="n"><div class="info-icon material-icons tooltipped" data-tooltip="The number of alternative completions to generate for each prompt.">info</div>
+                    Alternative Completions
+                </label>
+                <input type="text" id="n" name="n" placeholder="1">
+
+                <div style="display: none">
+                    <label for="stop">
+                        <div class="info-icon material-icons tooltipped" data-tooltip="A sequence where the API will stop generating further tokens.">info</div>
+                        Stop
+                    </label>
+                    <input type="text" id="stop" name="stop" placeholder="null">
+                </div>
+
+                <label for="temperature">
+                    <div class="info-icon material-icons tooltipped" data-tooltip="Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.">info</div>
+                    Temperature
+                </label>
+                <input type="text" id="temperature" name="temperature" placeholder="0.1">
+
+
+                <div class="switch gtp-model-type">
+                    <label>
+                        <span class="toggle-label">GPT-4</span>
+                        <input type="checkbox" id="engineToggle">
+                        <span class="lever"></span>
+                        <span class="toggle-label">GPT-3</span>
+                    </label>
+                </div>
+
+
+
+                <div class="switch gtp-mode">
+                    <label>
+                        <span class="toggle-label">Light</span>
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="lever"></span>
+                        <span class="toggle-label">Dark</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">Save Settings</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="layout/js/popup.js"></script>
+
+</body>
+</html>
