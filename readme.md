@@ -24,6 +24,8 @@ Add the extension
 6. Pin the slickGPT extension to your browser.
 7. Add your own API key by clicking the Settings button.
 
+It's that simple, have fun and enjoy!
+
 ## License
 
 MIT © Spencer Labadie (follow me on <a href="https://twitter.com/SpencerLabadie">Twitter</a>)
