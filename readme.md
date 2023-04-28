@@ -2,11 +2,13 @@
 
 A Chrome extension that adds a customized version of [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
 
+Pin it to your browser so you can easily use it on any website. No need to switch between tabs.
+
 Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, and Light and Dark Mode. An easy click to copy content and paste where ever you need it.
 
 You will need to add your own [API Key](https://platform.openai.com/account/api-keys). Setup is really simple, and if you don't already have an account with OpenAI, you will receive a free credit of $18 US dollars.
 
-More options coming very soon!
+More options coming very soon.
 
 ## Install
 
