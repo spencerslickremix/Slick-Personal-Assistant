@@ -10,7 +10,7 @@ Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Te
 
 You will need to add your own [API Key](https://platform.openai.com/account/api-keys). Setup is really simple, and if you don't already have an account with OpenAI, you will receive a free credit of $18 US dollars.
 
-More options coming very soon.
+Cheaper than paying $20 a month for chatGPT Pro. More options coming soon.
 
 ![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%201.png)
 
@@ -18,13 +18,13 @@ More options coming very soon.
 
 ![Screenshot 3.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%203.png)
 
-![Screenshot 4.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%204.png)
-
 ![Screenshot 5.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%205.png)
+
+![Screenshot 4.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%204.png)
 
 ## Install
 
-Simply click green CODE button on this repo and download the ZIP file and unpack it wherever you want on your computer.
+Simply click the green CODE button on the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
 
 Add the extension
 
