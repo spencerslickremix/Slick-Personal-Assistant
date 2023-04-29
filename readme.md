@@ -24,7 +24,7 @@ Cheaper than paying $20 a month for chatGPT Pro. More options coming soon.
 
 ## Install
 
-Simply click the green CODE button on the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
+Simply click the green CODE button near the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
 
 Add the extension
 
