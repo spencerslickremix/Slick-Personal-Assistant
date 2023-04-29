@@ -3,7 +3,7 @@
   "name": "SlickRemix: Your ChatGPT Web Assistant",
   "version": "0.0.1",
   "description": "Swiftly optimize text, code, and creativity on any website using GPT-3 or GPT-4.",
-  "permissions": ["storage", "tabs", "activeTab"],
+  "permissions": ["storage", "activeTab", "tabs", "scripting"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["contentScript.js"]
     }
   ],
   "icons": {
