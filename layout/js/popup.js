@@ -274,8 +274,12 @@ function createSuggestionElement(text) {
         showCopiedOverlay(e.target);
     });
 
+    const shareButtons = createShareButtons(text);
+    suggestion.appendChild(shareButtons);
+
     return suggestion;
 }
+
 
 function displaySuggestions(suggestions) {
     const suggestionsContainer = document.getElementById("suggestions-container");
