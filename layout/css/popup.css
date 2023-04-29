@@ -296,9 +296,8 @@ button:hover {
     border-radius: 4px;
 }
 .share-button svg {
-    fill: #1ebaf7;
+    fill: #1c9cf2;
     max-width:18px;
-
 }
 .share-button:hover {
     background: none;
