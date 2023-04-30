@@ -2,11 +2,15 @@
 
 ![440x280.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/440x280.png)
 
+## Description
+
 A Chrome extension that adds a customized version of [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
 
 Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, and Light and Dark Mode. An easy click to copy content and paste where ever you need it.
 
 Pin it to your browser so you can easily use it on any website. No need to switch between tabs.
+
+## How To
 
 1. By selecting text on the web page and clicking the pinned extension, the selected text will be automatically pasted to the textarea in the chrome extension popup.
 2. I added a STOP: after the text that is copied in the textarea so you can easily prompt your request, or not.
