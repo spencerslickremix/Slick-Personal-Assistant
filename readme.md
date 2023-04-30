@@ -8,9 +8,16 @@ Pin it to your browser so you can easily use it on any website. No need to switc
 
 Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, and Light and Dark Mode. An easy click to copy content and paste where ever you need it.
 
+1. By selecting text on the web page and clicking the pinned extension, the selected text will be automatically pasted to the textarea in the chrome extension popup.
+2. I added a STOP: after the text that is copied in the textarea so you can easily prompt your request, or not.
+2. Once you click the "Get Suggestions" button one or more suggestions will appear.
+3. You can then click on a suggestion and the text from that suggestion will be copied in place of the selected text on the webpage, if it's a content editable area.
+4. The copied text will also be added to the clipboard allowing the user to paste it in another tab if they want, or anywhere that text can be pasted too.
+5. As a bonus you can also click the Twitter icon that appears in the top right of a suggestion(s) and it will open Twitter so you can share the the suggestion.
+
 You will need to add your own [API Key](https://platform.openai.com/account/api-keys). Setup is really simple, and if you don't already have an account with OpenAI, you will receive a free credit of $18 US dollars.
 
-Cheaper than paying $20 a month for chatGPT Pro. More options coming soon.
+Cheaper than paying $20 a month for chatGPT Pro. More options, updated screenshots and video coming soon.
 
 ![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%201.png)
 
