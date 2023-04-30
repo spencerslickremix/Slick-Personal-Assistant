@@ -19,6 +19,19 @@ You will need to add your own [API Key](https://platform.openai.com/account/api-
 
 Cheaper than paying $20 a month for chatGPT Pro. More options, updated screenshots and video coming soon.
 
+
+![Screenshot 6.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%206.png)
+
+![Screenshot 7.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%207.png)
+
+![Screenshot 8.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%208.png)
+
+![Screenshot 9.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%209.png)
+
+![Screenshot 10.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%2010.png)
+
+![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots%2FScreenshot%2011.png)
+
 ![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%201.png)
 
 ![Screenshot 2.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%202.png)
