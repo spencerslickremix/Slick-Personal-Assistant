@@ -10,7 +10,7 @@ Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Te
 
 Pin it to your browser so you can easily use it on any website. No need to switch between tabs.
 
-## How To
+## How It Works
 
 1. By selecting text on the web page and clicking the pinned extension, the selected text will be automatically pasted to the textarea in the chrome extension popup.
 2. I added a STOP: after the text that is copied in the textarea so you can easily prompt your request, or not.
