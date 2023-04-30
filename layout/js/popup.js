@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     });
 
+
     // Initialize Materialize tooltips
     const tooltips = document.querySelectorAll(".tooltipped");
     M.Tooltip.init(tooltips);
@@ -289,6 +290,18 @@ function getSelectedTextFromActiveTab() {
             } else {
                 // Perform the desired action when there is no selected text, such as displaying a message
                 console.log("No selected text on the page.");
+            }
+        });
+    });
+}
+
+
+function replaceSelectedTextOnActiveTab(replacementText) {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id, { action: 'replaceSelectedText', replacementText }, (response) => {
+            if (!response.replaced) {
+                copyToClipboard(replacementText);
             }
         });
     });

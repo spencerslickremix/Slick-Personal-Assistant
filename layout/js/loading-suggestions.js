@@ -5,7 +5,10 @@ function createSuggestionElement(text) {
 
     // Add an event listener to the suggestion element
     suggestion.addEventListener('click', (e) => {
-        copyToClipboard(text);
+
+        replaceSelectedTextOnActiveTab(text);
+        // need to make option to copy to clip board if the option is not a input textarea of contenteditable div.
+        // copyToClipboard(text);
         showCopiedOverlay(e.target);
     });
 
@@ -86,3 +89,4 @@ function showSavingOverlay() {
 
     return savingOverlay;
 }
+
