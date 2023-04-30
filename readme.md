@@ -12,7 +12,7 @@ Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Te
 2. I added a STOP: after the text that is copied in the textarea so you can easily prompt your request, or not.
 2. Once you click the "Get Suggestions" button one or more suggestions will appear.
 3. You can then click on a suggestion and the text from that suggestion will be copied in place of the selected text on the webpage, if it's a content editable area.
-4. The copied text will also be added to the clipboard allowing the user to paste it in another tab if they want, or anywhere that text can be pasted too.
+4. The copied text will also be added to the clipboard allowing the you to paste it in another tab if you want, or anywhere that text can be pasted too.
 5. As a bonus you can also click the Twitter icon that appears in the top right of a suggestion(s) and it will open Twitter so you can share the the suggestion.
 
 You will need to add your own [API Key](https://platform.openai.com/account/api-keys). Setup is really simple, and if you don't already have an account with OpenAI, you will receive a free credit of $18 US dollars.
