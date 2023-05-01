@@ -46,6 +46,7 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 
 ![Screenshot 10.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%205.png)
 
+
 ## Install
 Simply click the green CODE button near the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
 
