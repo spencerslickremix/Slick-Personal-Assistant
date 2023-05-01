@@ -62,4 +62,4 @@ Simply click the green CODE button near the top right of this repo. Download the
 It's that simple, have fun and enjoy!
 
 ## License
-MIT © Spencer Labadie ( follow me on <a href="https://twitter.com/SpencerLabadie">Twitter</a> )
+2023 MIT © Spencer Labadie . Follow me on <a href="https://twitter.com/SpencerLabadie">Twitter</a>
