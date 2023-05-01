@@ -1,4 +1,5 @@
-# SlickRemix: ChatGPT Chrome Extension Web Assistant
+# Slick Personal Assistant
+## Chrome Extension, "Powered by ChatGPT"
 
 ![440x280.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/440x280.png)
 
