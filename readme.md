@@ -8,7 +8,7 @@ A Chrome extension that adds [ChatGPT](https://chat.openai.com) to your browser.
 
 Pin the Extension to your browser so you can easily use on any tab. It will work independently between tabs too. Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, Light and Dark Mode. 
 
-I've listed some use cases and also a breakdown of the Custom Options, Settings and there meaning.
+Below are some use cases and also a breakdown of the Custom Options, Settings and there meaning.
 
 ## Use Cases
 1. Say you are editing your website and want to modify some text, or create a blog post. It would be easier to select that text on your website, have it appear automatically in the popup and then ask chatGPT to make the changes you want after the STOP. Once a suggestion(s) appears click it and the selected text on the page will be replaced. By adjusting the Temperature from the Settings tab you can have the response be less or more creative.
@@ -34,17 +34,17 @@ I've listed some use cases and also a breakdown of the Custom Options, Settings 
 
 ## Screenshots
 
-![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%206.png)
+![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%206.png)
 
-![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%201.png)
+![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%201.png)
 
-![Screenshot 2.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%202.png)
+![Screenshot 2.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%202.png)
 
-![Screenshot 8.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%203.png)
+![Screenshot 8.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%203.png)
 
-![Screenshot 9.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%204.png)
+![Screenshot 9.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%204.png)
 
-![Screenshot 10.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%205.png)
+![Screenshot 10.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%205.png)
 
 ## Install
 Simply click the green CODE button near the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
