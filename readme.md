@@ -38,6 +38,10 @@ Below are custom options to make the workflow easier. I've listed some use cases
 
 ![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%2011.png)
 
+![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%201.png)
+
+![Screenshot 2.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%202.png)
+
 ![Screenshot 7.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%207.png)
 
 ![Screenshot 8.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/Screenshot%208.png)
