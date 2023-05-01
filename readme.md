@@ -4,11 +4,11 @@
 
 ## Description
 
-A Chrome extension that adds a customized version of [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
+A Chrome extension that adds [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
 
-Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, and Light and Dark Mode. An easy click to copy content and paste where ever you need it.
+Choose between GPT-3 or GPT-4, the Number of Tokens, Alternative Completions, Temperature, Light and Dark Mode. An easy click to copy content and paste where ever you need it.
 
-Below are the custom options to make the workflow a bit easier. Pin it to your browser so you can easily use it on any website. It will work independently between tabs too.
+Below are some additional custom options to make the workflow a bit easier. Pin it to your browser so you can easily use it on any website. It will work independently between tabs too.
 
 ## Additional Custom Options
 
