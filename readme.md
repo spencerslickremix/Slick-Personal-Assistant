@@ -55,9 +55,9 @@ Simply click the green CODE button near the top right of this repo. Download the
 1. Go to chrome://extensions in your Google Chrome browser
 2. Check the Developer mode checkbox in the top right-hand corner
 3. Click "Load Unpacked" to see a file-selection dialog
-4. Select the location where the slickGPT folder is.
+4. Select the location where the Slick-Personal-Assistant folder is.
 5. Click the Google Extensions icon in your browser tab, looks like a puzzle piece.
-6. Pin the slickGPT extension to your browser.
+6. Pin the "SlickRemix: Your ChatGPT Web Assistant" extension to your browser.
 7. Add your own API key by clicking the Settings button.
 
 It's that simple, have fun and enjoy!
