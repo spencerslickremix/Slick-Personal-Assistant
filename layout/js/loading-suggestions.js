@@ -20,7 +20,7 @@ function createSuggestionElement(text) {
 
 function displaySuggestions(suggestions) {
     const suggestionsContainer = document.getElementById("suggestions-container");
-    suggestionsContainer.innerHTML = "";
+    // suggestionsContainer.innerHTML = "";
 
     for (const suggestion of suggestions) {
         const suggestionElement = createSuggestionElement(suggestion);
@@ -31,6 +31,7 @@ function displaySuggestions(suggestions) {
     chrome.storage.local.set({ savedSuggestions: suggestions }, function () {
         console.log("Suggestions saved.");
     });
+
 
     // Show or hide the "Clear" button
     const clearButton = document.getElementById("clear-button");
@@ -43,10 +44,9 @@ function displaySuggestions(suggestions) {
     }
 }
 
-
 function showLoadingAnimation() {
     const suggestionsContainer = document.getElementById("suggestions-container");
-    suggestionsContainer.innerHTML = ""; // Clear the suggestions container
+    // suggestionsContainer.innerHTML = ""; // Clear the suggestions container
 
     const loadingAnimation = document.createElement("div");
     loadingAnimation.classList.add("loading-animation");
@@ -58,7 +58,18 @@ function showLoadingAnimation() {
     }
 
     suggestionsContainer.appendChild(loadingAnimation);
+    return loadingAnimation; // Add this line
 }
+
+function scrollToLoadingAnimation(loadingAnimation) {
+    const container = document.getElementById("suggestions-container");
+    const loadingAnimationOffset = loadingAnimation.offsetTop - 140;
+    container.scrollTo({
+        top: loadingAnimationOffset,
+        behavior: 'smooth'
+    });
+}
+
 
 function hideLoadingAnimation() {
     const loadingAnimation = document.querySelector(".loading-animation");
@@ -67,26 +78,55 @@ function hideLoadingAnimation() {
     }
 }
 
-function showSavingOverlay() {
-    const settingsContent = document.getElementById("settings-tab");
-    const savingOverlay = document.createElement("div");
-    savingOverlay.classList.add("saving-overlay");
-    savingOverlay.textContent = "Saving...";
+// For Get Suggestions specifically
+function showCopiedOverlay(target) {
+    const overlay = document.createElement('div');
+    overlay.classList.add('copied-overlay');
+    overlay.textContent = 'Copied';
 
-    savingOverlay.style.position = "absolute";
-    savingOverlay.style.top = "0";
-    savingOverlay.style.left = "0";
-    savingOverlay.style.width = "100%";
-    savingOverlay.style.height = "100%";
-    savingOverlay.style.display = "flex";
-    savingOverlay.style.justifyContent = "center";
-    savingOverlay.style.alignItems = "center";
-    savingOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    savingOverlay.style.color = "white";
-    savingOverlay.style.zIndex = "10";
+    // Set position and size of the overlay
+    const suggestionRect = target.getBoundingClientRect();
 
-    settingsContent.appendChild(savingOverlay);
+    overlay.style.position = 'fixed';
+    overlay.style.top = suggestionRect.top + 'px';
+    overlay.style.left = suggestionRect.left + 'px';
+    overlay.style.width = suggestionRect.width + 'px';
+    overlay.style.height = suggestionRect.height + 'px';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
 
-    return savingOverlay;
+    document.body.appendChild(overlay);
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+    }, 1500);
 }
 
+
+// For Saving
+function showOverlay(text) {
+    const targetElement = document.body;
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    overlay.textContent = text;
+
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, .8)";
+    overlay.style.color = "white";
+    overlay.style.zIndex = "10";
+
+    targetElement.appendChild(overlay);
+
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+    }, 1500);
+
+   // return overlay;
+}

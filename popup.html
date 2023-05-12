@@ -6,67 +6,152 @@
     <link rel="stylesheet" href="layout/css/popup.css" media="all">
 </head>
 <body>
-<script src="layout/js/materialize.min.js"></script>
-<script src="layout/js/popup.js"></script>
+<div id="custom-context-menu">
+    <div class="saved-prompts-list">
+        <div id="saved-custom-prompts-header">Saved Custom Prompts</div>
+    </div>
+    <ul><-- custom prompts are inserted here via js --></ul>
+</div>
+
+<div class="settings-overlay hidden">
+
+    <ul class="settings-menu">
+        <li class="suggestions-menu-option tablinks active" data-tab="suggestions-tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <defs>
+                    <style>.fa-secondary {
+                        opacity: .4
+                    }</style>
+                </defs>
+                <path class="fa-primary"
+                      d="M128 168c0-13.3 10.7-24 24-24H360c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24zm0 96c0-13.3 10.7-24 24-24H264c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24z"/>
+                <path class="fa-secondary"
+                      d="M0 64C0 28.7 28.7 0 64 0H448c35.3 0 64 28.7 64 64V352c0 35.3-28.7 64-64 64H309.3L185.6 508.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3V416H64c-35.3 0-64-28.7-64-64V64zm152 80c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H152zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H264c13.3 0 24-10.7 24-24s-10.7-24-24-24H152z"/>
+            </svg>
+            <div>Suggestions</div>
+        </li>
+        <li class="custom-context-menu-option tablinks" data-tab="custom-context-menu-settings-tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <defs>
+                    <style>.fa-secondary {
+                        opacity: .4
+                    }</style>
+                </defs>
+                <path class="fa-primary"
+                      d="M0 96C0 43 43 0 96 0s96 43 96 96v32H320v64H192 128 96h0C43 192 0 149 0 96zM320 320h64 32c53 0 96 43 96 96s-43 96-96 96s-96-43-96-96V384H192V320H320zM128 128V96c0-17.7-14.3-32-32-32S64 78.3 64 96s14.3 32 32 32h32zM384 384v32c0 17.7 14.3 32 32 32s32-14.3 32-32s-14.3-32-32-32H384z"/>
+                <path class="fa-secondary"
+                      d="M320 128V96c0-53 43-96 96-96s96 43 96 96s-43 96-96 96H384V320H320V192 128zM192 320v64 32c0 53-43 96-96 96s-96-43-96-96s43-96 96-96h32V192h64V320zm-64 64H96c-17.7 0-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32V384zM384 128h32c17.7 0 32-14.3 32-32s-14.3-32-32-32s-32 14.3-32 32v32z"/>
+            </svg>
+            <div>Custom Prompts</div>
+        </li>
+        <li class="settings-menu-option tablinks" data-tab="settings-tab">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <defs>
+                    <style>.fa-secondary {
+                        opacity: .4
+                    }</style>
+                </defs>
+                <path class="fa-primary"
+                      d="M305.4 21.8c-1.3-10.4-9.1-18.8-19.5-20C276.1 .6 266.1 0 256 0c-11.1 0-22.1 .7-32.8 2.1c-10.3 1.3-18 9.7-19.3 20l-2.9 23.1c-.8 6.4-5.4 11.6-11.5 13.7c-9.6 3.2-19 7.2-27.9 11.7c-5.8 3-12.8 2.5-18-1.5l-18-14c-8.2-6.4-19.7-6.8-27.9-.4c-16.6 13-31.5 28-44.4 44.7c-6.3 8.2-5.9 19.6 .5 27.8l14.2 18.3c4 5.1 4.4 12 1.5 17.8c-4.4 8.8-8.2 17.9-11.3 27.4c-2 6.2-7.3 10.8-13.7 11.6l-22.8 2.9c-10.3 1.3-18.7 9.1-20 19.4C.7 234.8 0 245.3 0 256c0 10.6 .6 21.1 1.9 31.4c1.3 10.3 9.7 18.1 20 19.4l22.8 2.9c6.4 .8 11.7 5.4 13.7 11.6c3.1 9.5 6.9 18.7 11.3 27.5c2.9 5.8 2.4 12.7-1.5 17.8L54 384.8c-6.4 8.2-6.8 19.6-.5 27.8c12.9 16.7 27.8 31.7 44.4 44.7c8.2 6.4 19.7 6 27.9-.4l18-14c5.1-4 12.2-4.4 18-1.5c9 4.6 18.3 8.5 27.9 11.7c6.1 2.1 10.7 7.3 11.5 13.7l2.9 23.1c1.3 10.3 9 18.7 19.3 20c10.7 1.4 21.7 2.1 32.8 2.1c10.1 0 20.1-.6 29.9-1.7c10.4-1.2 18.2-9.7 19.5-20l2.8-22.5c.8-6.5 5.5-11.8 11.7-13.8c10-3.2 19.7-7.2 29-11.8c5.8-2.9 12.7-2.4 17.8 1.5L385 457.9c8.2 6.4 19.6 6.8 27.8 .5c2.8-2.2 5.5-4.4 8.2-6.7L451.7 421c1.8-2.2 3.6-4.4 5.4-6.6c6.5-8.2 6-19.7-.4-27.9l-14-17.9c-4-5.1-4.4-12.2-1.5-18c4.8-9.4 9-19.3 12.3-29.5c2-6.2 7.3-10.8 13.7-11.6l22.8-2.8c10.3-1.3 18.8-9.1 20-19.4c.2-1.7 .4-3.5 .6-5.2V230.1c-.2-1.7-.4-3.5-.6-5.2c-1.3-10.3-9.7-18.1-20-19.4l-22.8-2.8c-6.4-.8-11.7-5.4-13.7-11.6c-3.4-10.2-7.5-20.1-12.3-29.5c-3-5.8-2.5-12.8 1.5-18l14-17.9c6.4-8.2 6.8-19.7 .4-27.9c-1.8-2.2-3.6-4.4-5.4-6.6L421 60.3c-2.7-2.3-5.4-4.5-8.2-6.7c-8.2-6.4-19.6-5.9-27.8 .5L366.7 68.3c-5.1 4-12.1 4.4-17.8 1.5c-9.3-4.6-19-8.6-29-11.8c-6.2-2-10.9-7.3-11.7-13.7l-2.8-22.5zM256 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/>
+                <path class="fa-secondary" d="M192 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z"/>
+            </svg>
+            <div>Settings</div>
+        </li>
+    </ul>
+</div>
+
+<div class="header"><span class="slickremix-logo"></span><span class="slickremix-title">Your Personal Automated Assistant</span>
+    <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
 
 <div class="container">
-    <div class="header">Your Personal Automated Assistant</div>
-    <div class="tab">
-        <button class="tablinks active" data-tab="suggestions-tab">Suggestions</button>
-        <button class="tablinks" data-tab="settings-tab">Settings</button>
-    </div>
+
     <div id="suggestions-tab" class="tabcontent">
+        <div id="suggestions-container"></div>
         <div class="content">
-            <textarea id="input-text" rows="5" placeholder="Type your text here...">Is this working?</textarea>
+            <textarea id="input-text"
+                      placeholder="Type your text here...">Is this working, only give one word.</textarea>
             <button id="submit-button" class="submit-button-suggestions">Get Suggestions</button>
             <button id="clear-button" class="submit-button-suggestions">Clear</button>
-            <div id="suggestions-container"></div>
         </div>
     </div>
     <div id="settings-tab" class="tabcontent">
         <div class="content">
+            <h3>Settings Options</h3>
+            <p>Hover over the info icon next to each settings option to understand what it does and how to use it.</p>
+
             <form id="settings-form">
-
-                <label for="api-key">
-                    <div class="info-icon material-icons tooltipped" data-tooltip="Your OpenAI API key is required to access chatGPT. Click the API Key link to get yours. You must have an account setup. OpenAI gives you $18 free to start, after that you will need to add payment method to continue use.">info</div>
-                    <a href="https://platform.openai.com/account/api-keys" target="_blank">API Key</a>
-                </label>
-                <input type="text" id="api-key" name="api-key">
-
-                <label for="max-tokens">
-                    <div class="info-icon material-icons tooltipped" data-tooltip="The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per prompt.">info</div>
-                    Max Tokens
-                </label>
-                <input type="text" id="max-tokens" name="max-tokens" placeholder="250. Max 4097">
-
-                <label for="n"><div class="info-icon material-icons tooltipped" data-tooltip="The number of alternative completions to generate for each prompt.">info</div>
-                    Alternative Completions
-                </label>
-                <input type="text" id="n" name="n" placeholder="1">
-
-                <div style="display: none">
-                    <label for="stop">
-                        <div class="info-icon material-icons tooltipped" data-tooltip="A sequence where the API will stop generating further tokens.">info</div>
-                        Stop
+                <div class="settings-wrap">
+                    <label for="api-key">
+                        <div class="info-icon material-icons tooltipped"
+                             data-tooltip="Your OpenAI API key is required to access chatGPT. Click the API Key link to get yours. You must have an account setup. OpenAI gives you $18 free to start, after that you will need to add payment method to continue use.">
+                            info
+                        </div>
+                        <a href="https://platform.openai.com/account/api-keys" target="_blank">API Key</a>
                     </label>
-                    <input type="text" id="stop" name="stop" placeholder="null">
+                    <input type="text" id="api-key" name="api-key">
+                </div>
+
+                <div class="settings-wrap">
+                    <label for="max-tokens">
+                        <div class="info-icon material-icons tooltipped"
+                             data-tooltip="The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per prompt.">
+                            info
+                        </div>
+                        Max Tokens
+                    </label>
+                    <input type="text" id="max-tokens" name="max-tokens" placeholder="250. Max 4097">
+                </div>
+
+                <div class="settings-wrap">
+                    <label for="n">
+                        <div class="info-icon material-icons tooltipped"
+                             data-tooltip="The number of alternative completions to generate for each prompt.">info
+                        </div>
+                        Alternative Completions
+                    </label>
+                    <input type="text" id="n" name="n" placeholder="1">
+                </div>
+
+                <div class="settings-wrap">
+                    <div style="display: none">
+                        <label for="stop">
+                            <div class="info-icon material-icons tooltipped"
+                                 data-tooltip="A sequence where the API will stop generating further tokens.">info
+                            </div>
+                            Stop
+                        </label>
+                        <input type="text" id="stop" name="stop" placeholder="null">
+                    </div>
                 </div>
 
                 <label for="temperature">
-                    <div class="info-icon material-icons tooltipped" data-tooltip="Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.">info</div>
+                    <div class="info-icon material-icons tooltipped"
+                         data-tooltip="Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.">
+                        info
+                    </div>
                     Temperature
                 </label>
                 <input type="text" id="temperature" name="temperature" placeholder="0.1">
 
-
                 <div class="switch gtp-model-type">
+
                     <label>
-                        <span class="toggle-label">GPT-4</span>
+                        <div class="gpt-description"><strong>Note:</strong> You must have a GPT-4 API Token for GPT-4 option to work.</div>
+                        <span class="toggle-label">GPT-3 Turbo</span>
                         <input type="checkbox" id="engineToggle">
                         <span class="lever"></span>
-                        <span class="toggle-label">GPT-3</span>
+                        <span class="toggle-label">GPT-4</span>
                     </label>
                 </div>
+
                 <div class="switch gtp-mode">
                     <label>
                         <span class="toggle-label">Light</span>
@@ -75,13 +160,82 @@
                         <span class="toggle-label">Dark</span>
                     </label>
                 </div>
+
                 <button type="submit" class="submit-button">Save Settings</button>
             </form>
 
         </div>
     </div>
-</div>
 
+
+    <div id="custom-context-menu-settings-tab" class="tabcontent">
+        <h3>Create your own custom prompts</h3>
+        <p id="custom-context-menu-directions">Use this tool under the Suggestions menu. Right click to view custom
+            prompts. Add a Description and Value for each Prompt. GitHub method available as well.</p>
+
+        <form>
+            <div id="customPromptContainer">
+                <div class="prompt-wrap">
+                    <label for="prompt-1-description">Prompt 1: Description</label>
+                    <input type="text" id="prompt-1-description" placeholder="Enter prompt 1 description"/>
+                    <label for="prompt-1-value">Prompt 1: Value</label>
+                    <input type="text" id="prompt-1-value" placeholder="Enter prompt 1 value"/>
+                </div>
+
+                <div class="prompt-wrap">
+                    <label for="prompt-2-description">Prompt 2: Description</label>
+                    <input type="text" id="prompt-2-description" placeholder="Enter prompt 2 description"/>
+                    <label for="prompt-2-value">Prompt 2: Value</label>
+                    <input type="text" id="prompt-2-value" placeholder="Enter prompt 2 value"/>
+                </div>
+                <div class="prompt-wrap">
+                    <label for="prompt-3-description">Prompt 3: Description</label>
+                    <input type="text" id="prompt-3-description" placeholder="Enter prompt 3 description"/>
+                    <label for="prompt-3-value">Prompt 3: Value</label>
+                    <input type="text" id="prompt-3-value" placeholder="Enter prompt 3 value"/>
+                </div>
+
+                <div class="prompt-wrap">
+                    <label for="prompt-4-description">Prompt 4: Description</label>
+                    <input type="text" id="prompt-4-description" placeholder="Enter prompt 4 description"/>
+                    <label for="prompt-4-value">Prompt 4: Value</label>
+                    <input type="text" id="prompt-4-value" placeholder="Enter prompt 4 value"/>
+                </div>
+
+                <div class="prompt-wrap">
+                    <label for="prompt-5-description">Prompt 5: Description</label>
+                    <input type="text" id="prompt-5-description" placeholder="Enter prompt 5 description"/>
+                    <label for="prompt-5-value">Prompt 5: Value</label>
+                    <input type="text" id="prompt-5-value" placeholder="Enter prompt 5 value"/>
+                </div>
+            </div>
+
+
+            <div class="github-option">
+
+                <p>
+                    <label>
+                        <input type="checkbox" id="useGithubToggle"/>
+                        <span>Use GitHub Repository</span>
+                    </label>
+                </p>
+                <div id="githubUrlContainer">
+                    <div class="prompt-wrap">
+                        <input type="text" id="githubUrl" placeholder="Enter GitHub repository URL"/>
+                        <span class="helper-text">You can add and edit many prompts this way, and it's Free. All you have to do is make sure your README.md file contains the prompts in the format: "Description: Value". View <a
+                                target="_blank" href="https://github.com/spencerslickremix/chatGPT-Prompts/tree/main">example and simple instructions</a> to get started.</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <br/>
+            <button id="save-custom-context-menu-settings" type="submit">Save Custom Prompts</button>
+        </form>
+    </div>
+
+</div>
+<script src="layout/js/materialize.min.js"></script>
 <script src="layout/js/popup.js"></script>
 <script src="layout/js/loading-suggestions.js"></script>
 <script src="layout/js/share.js"></script>

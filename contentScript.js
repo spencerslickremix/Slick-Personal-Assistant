@@ -11,12 +11,14 @@ if (!window.hasRunContentScript) {
             console.log('Runtime.onMessage get selected text' );
             console.log( selectedText );
 
+            chrome.runtime.sendMessage({ action: "textCopied" });
+
             sendResponse(selectedText);
+
         } else if (request.action === 'replaceSelectedText') {
             const replaced = replaceSelectedText(request.replacementText);
             sendResponse({ success: true, replaced });
         }
-
     });
 
     let isReplacing = false;
@@ -57,12 +59,10 @@ if (!window.hasRunContentScript) {
                 replaced = true;
             }
         } else {
-            console.warn('Cannot replace selected text: active element is not an input, textarea, or contentEditable element');
+            console.log('Cannot replace selected text: active element is not an input, textarea, or contentEditable element');
         }
 
         isReplacing = false; // Reset the flag after the function has finished
         return replaced;
     }
-
-
 }

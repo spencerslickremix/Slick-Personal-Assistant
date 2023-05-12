@@ -1,25 +1,53 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    width: 400px;
+    padding: 70px 0 0;
+    width: 450px;
     display: flex;
     flex-direction: column;
     /* min-height: 100vh; */
 }
 
+@font-face {
+    font-family: SlickRemix;
+    src: url(fonts/SlickRemix.eot?p9iqv);
+    src: url(fonts/SlickRemix.eot?#iefixp9iqv) format('embedded-opentype'), url(fonts/SlickRemix.ttf?p9iqv) format('truetype'), url(fonts/SlickRemix.svg?p9iqv#SlickRemix) format('svg');
+    font-weight: 400;
+    font-style: normal
+}
+
+span.slickremix-logo:before {
+    font-family: SlickRemix;
+    content: "\e600";
+    line-height: 1.2em;
+    font-size: 20px;
+    margin-right: 9px;
+    font-style: normal;
+    color: #f0f0f0;
+}
+
+.slickremix-title {
+    position: relative;
+    top: -3px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.dark-mode span.slickremix-logo:before {
+    color: #e42635;
+}
+
 .header {
     background-color: #005cb9;
     color: white;
-    text-align: center;
-    padding: 16px;
-    font-size: 17px;
-    font-weight: 600;
+    text-align: left;
+    padding: 18px 18px 18px 20px;
+    font-weight: normal;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
+    z-index: 11;
 }
 
 .tab {
@@ -30,6 +58,8 @@ body {
     padding: 10px 0;
     border-bottom: 1px solid #e0e0e0;
     width: 100%;
+    z-index: 1;
+    position: relative;
 }
 
 .tablinks {
@@ -39,42 +69,49 @@ body {
     cursor: pointer;
     padding: 10px 16px;
     font-size: 14px;
-    color: #666;
+    font-weight: normal;
+    color: #b0afaf;
 }
 
 .tablinks.active {
-    background-color: #fffdfd;
-    color: #333;
+    /* background-color: #fffdfd; */
+    /* color: #333; */
 }
 
 .suggestion {
+    white-space: pre-wrap;
     padding: 17px 25px;
-    background:#f7f7f7;
-    border:1px solid #dcd9d9;
-    border-radius:3px;
-    font-size:14px;
-    margin:10px 0;
-    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px solid #dcd9d9;
+    border-radius: 3px;
+    font-size: 14px;
+    margin: 10px 0;
     word-break: break-word;
+    overflow-wrap: break-word;
     position: relative;
+}
+
+.suggestion button:focus {
+    outline: none;
+    background: none !important;
 }
 button:focus {
     outline: none;
-    background: none;
 }
+
 .submit-button-suggestions:focus, .submit-button:focus {
-    background:#015cb9;
+    background: #015cb9;
 }
 
 .tablinks:hover:not(.active) {
-    background-color: #ffffff;
-    color: #333;
+    background-color: #015cb8;
+    color: #fff;
 }
 
 .tabcontent {
     display: none;
     flex-grow: 1;
-    padding: 16px; /* Add padding to the content */
+    padding: 15px 10px; /* Add padding to the content */
 }
 
 .settings-form {
@@ -89,18 +126,36 @@ button:focus {
 }
 
 label {
-    position:relative;
+    position: relative;
     padding-left: 23px;
     color: #929292;
 }
+
+.gpt-description {
+    padding: 0 0 20px 0;
+    font-size: 13px
+}
+
+.gpt-description strong {
+    font-weight: bold;
+}
+
+#custom-context-menu-settings-tab label {
+    padding-left: 0px;
+}
+
+#custom-context-menu-settings-tab input {
+    margin-bottom: 10px;
+}
+
 .switch label {
     padding-left: 0px;
 }
 
 
 .toggle-label {
-    display:inline-block;
-    min-width:35px;
+    display: inline-block;
+    min-width: 35px;
 }
 
 input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
@@ -109,7 +164,7 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
     box-shadow: 0 1px 0 0 #1a73e8;
 }
 
-input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-default):focus:not([readonly])+label, input[type=password]:not(.browser-default):focus:not([readonly])+label, input[type=email]:not(.browser-default):focus:not([readonly])+label, input[type=url]:not(.browser-default):focus:not([readonly])+label, input[type=time]:not(.browser-default):focus:not([readonly])+label, input[type=date]:not(.browser-default):focus:not([readonly])+label, input[type=datetime]:not(.browser-default):focus:not([readonly])+label, input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, input[type=tel]:not(.browser-default):focus:not([readonly])+label, input[type=number]:not(.browser-default):focus:not([readonly])+label, input[type=search]:not(.browser-default):focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+input:not([type]):focus:not([readonly]) + label, input[type=text]:not(.browser-default):focus:not([readonly]) + label, input[type=password]:not(.browser-default):focus:not([readonly]) + label, input[type=email]:not(.browser-default):focus:not([readonly]) + label, input[type=url]:not(.browser-default):focus:not([readonly]) + label, input[type=time]:not(.browser-default):focus:not([readonly]) + label, input[type=date]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime]:not(.browser-default):focus:not([readonly]) + label, input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label, input[type=tel]:not(.browser-default):focus:not([readonly]) + label, input[type=number]:not(.browser-default):focus:not([readonly]) + label, input[type=search]:not(.browser-default):focus:not([readonly]) + label, textarea.materialize-textarea:focus:not([readonly]) + label {
     color: #a4a6a7;
 }
 
@@ -135,15 +190,6 @@ button {
     font-size: 14px;
 }
 
-textarea {
-    padding: 8px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    box-sizing: border-box;
-    resize: vertical;
-    width: 100%;
-    min-height: 200px;
-}
 
 textarea:focus {
     outline: none;
@@ -162,16 +208,18 @@ button {
     transition: background-color 0.3s;
 }
 
-button:hover {
+button:hover, button:focus {
     background-color: #0073e6;
 }
 
 .submit-button {
     margin: 30px 0 15px;
 }
+
 .submit-button-suggestions {
-    margin: 10px 0 15px;
+    margin: 10px 0 8px;
 }
+
 #temperature {
     margin-bottom: 5px;
 }
@@ -205,15 +253,20 @@ button:hover {
     }
 }
 
+body.dark-mode {
+    overflow: clip !important;
+}
+
 #suggestions-container {
     position: relative;
+    margin-bottom: 110px;
 }
 
 .loading-animation {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 0;
+    margin: 40px 0;
 }
 
 .dot {
@@ -255,34 +308,38 @@ button:hover {
 .material-tooltip {
     width: 340px !important;
     text-align: left;
-    padding:15px;
-    z-index:1000;
+    padding: 15px;
+    z-index: 1000;
 }
 
 
 .material-tooltip {
     left: 30px !important;
-    margin-top:-10px
+    margin-top: -10px
 }
 
-.saving-overlay {
+.overlay {
     font-size: 16px;
+    opacity: 0;
+    animation: fade-in-out 1.5s forwards;
 }
+
+.overlay.fade-out {
+    opacity: 0;
+}
+
 .gtp-model-type {
     margin: 20px 0 25px;
 }
-
-
-
 
 
 .share-container {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    position:absolute;
-    right:-4px;
-    top:-7px;
+    position: absolute;
+    right: -4px;
+    top: -23px;
 }
 
 .share-button {
@@ -296,37 +353,44 @@ button:hover {
     text-decoration: none;
     border-radius: 4px;
 }
+
 .share-button svg {
     fill: #1c9cf2;
-    max-width:18px;
+    max-width: 18px;
 }
+
 .share-button:hover {
     background: none;
 }
+
 .share-button svg:hover {
     fill: #0f98cd;
 }
 
 
+.settings-wrap {
+    margin-bottom: 20px
+}
 
 
+#githubUrlContainer .helper-text {
+    font-size: 13px;
+    color: #989696
+}
 
-
-
-
-
-
-
-
+#githubUrlContainer .prompt-wrap {
+    padding-top: 5px
+}
 
 /* Dark mode styles */
 .dark-mode {
     background-color: #212121;
-    color:#ffffff;
+    color: #ffffff;
 }
 
 .dark-mode .header {
-    background-color: #424242;
+    background-color: #1d1d1d;
+    box-shadow: 0px -1px 4px 0px #959292;
 }
 
 .dark-mode textarea,
@@ -358,9 +422,279 @@ button:hover {
     background-color: #212121;
 }
 
-.switch label input[type=checkbox]:checked+.lever {
+.dark-mode #suggestions-tab .content {
+    background: #2a2a2a;
+}
+
+
+.switch label input[type=checkbox]:checked + .lever {
     background-color: #6d6d6d !important;
 }
-.switch label input[type=checkbox]:checked+.lever:after {
+
+.switch label input[type=checkbox]:checked + .lever:after {
     background-color: #d9d9d9;
+}
+
+.gtp-model-type label {
+    display: block;
+}
+
+#suggestions-tab .content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    padding: 10px 15px;
+    box-shadow: -1px 9px 15px 3px #000;
+    width: 100%;
+    z-index: 1;
+}
+
+#suggestions-tab .content textarea {
+    border: none;
+    overflow-y: auto;
+    resize: none;
+    max-height: 250px;
+}
+
+textarea {
+    padding: 8px 8px 0 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    box-shadow: none !important;
+}
+
+#suggestions-tab {
+    min-height: 40px;
+}
+
+#suggestions-tab.tabcontent {
+    display: none;
+    flex-grow: 1;
+    padding: 8px; /* Add padding to the content */
+}
+
+#submit-button {
+    margin-left: 5px;
+}
+
+#suggestions-container {
+    height: 404px;
+    overflow: auto;
+}
+
+/* Add styles for the custom context menu */
+#custom-context-menu {
+    display: none;
+    position: absolute;
+    background-color: #202020;
+    border: 1px solid #4f4e4e;
+    border-radius: 5px;
+    box-shadow: 0px 5px 20px 0px rgb(0 0 0 / 64%);
+    z-index: 100;
+    color: #fff;
+    max-width: 350px;
+    min-width: 350px;
+    opacity: 0;
+    transition: opacity .5s; /* adjust duration as needed */
+}
+
+#saved-custom-prompts-header {
+    cursor: pointer;
+}
+
+.saved-prompts-list {
+    background: #005bb6;
+    padding: 8px 8px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.saved-prompts-list a {
+    color: #fff;
+}
+
+#custom-context-menu ul {
+    margin: 0;
+    padding: 5px;
+    list-style: none;
+    overflow: auto;
+    max-height: 300px;
+}
+
+#custom-context-menu li {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: .2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#custom-context-menu li:hover {
+    background-color: #353434;
+}
+
+#custom-context-menu-settings-tab {
+
+}
+
+.tabcontent h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+}
+
+.tabcontent p {
+    font-size: 13px;
+    margin: 0 0 25px 0;
+    color: #989696;
+}
+
+#save-custom-context-menu-settings {
+    margin: -10px 0 20px 0;
+}
+
+.prompt-wrap {
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px -2px 9px #70707029;
+}
+
+.dark-mode .prompt-wrap {
+    background: #6f6f6f24;
+    box-shadow: none;
+}
+
+
+/* Hamburger menu */
+.hamburger-menu {
+    cursor: pointer;
+    position: absolute;
+    top: 17px;
+    right: 17px;
+    width: 28px;
+    height: 20px;
+    margin-top: 2px;
+}
+
+.hamburger-menu span {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 50px;
+    background-color: #fffefe;
+    transition: all 0.3s;
+}
+
+.dark-mode .hamburger-menu span {
+    background-color: #d0d0d0;
+}
+
+.hamburger-menu span:first-child {
+    top: 0;
+}
+
+.hamburger-menu span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger-menu span:last-child {
+    bottom: 0;
+}
+
+/* Settings Overlay */
+.settings-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 83%);
+    z-index: 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.settings-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.settings-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings-menu {
+    position: absolute;
+    top: 60px;
+    list-style-type: none;
+    padding: 0;
+    margin: 4px 0 0;
+    text-align: center; /* Add this line to center the menu items horizontally */
+    width: 100%;
+}
+
+.settings-menu li {
+    padding: 15px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    background: #0e0e0e;
+    margin-bottom: 2px;
+    color: #fff;
+}
+
+.dark-mode .settings-menu li {
+    background: #262626;
+}
+
+.settings-menu li.active {
+    background: #005cb9;
+    /* color:#0b0b0b; */
+}
+
+.settings-menu li.active svg, .settings-menu li:hover svg {
+    /* fill:#0b0b0b; */
+}
+
+.settings-menu svg {
+    max-width: 25px;
+    display: inline-block;
+    fill: #fff;
+    margin: 5px 0 2px 0;
+}
+
+.settings-menu div {
+    position: relative;
+    margin: 0px 0 5px;
+}
+
+.settings-menu button {
+    width: 200px;
+    text-align: left
+}
+
+.container input {
+    font-size: 14px !important;
+}
+
+.github-option {
+    margin-top: 30px;
+    margin-left: 1px
+}
+
+.github-option p {
+    padding-left: 8px;
+    margin-bottom: 15px;
 }

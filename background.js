@@ -10,11 +10,11 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
         throw new Error("API key not provided. Please enter your API key in the settings.");
     }
 
-    // gpt3: curie
-    // gpt4: text-davinci-002
-    const engineURL = engine === 'gpt3' ? 'https://api.openai.com/v1/engines/curie/completions' : 'https://api.openai.com/v1/engines/text-davinci-002/completions';
+    const model = engine === 'gpt3' ? 'gpt-3.5-turbo' : 'gpt-4';
 
-    console.log( engineURL );
+    const engineURL = 'https://api.openai.com/v1/chat/completions';
+
+    console.log(engineURL);
 
     const response = await fetch(engineURL, {
         method: "POST",
@@ -23,7 +23,8 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
             "Authorization": `Bearer ${apiKey}`
         },
         body: JSON.stringify({
-            prompt: prompt,
+            model: model,
+            messages: [{ role: "assistant", content: prompt }],
             max_tokens: parseInt(maxTokens) || 250,
             n: parseInt(n) || 1,
             stop: stop || null,
@@ -42,7 +43,7 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
 
     const data = await response.json();
     if (data.choices) {
-        return data.choices.map((choice) => choice.text.trim());
+        return data.choices.map((choice) => choice.message.content.trim());
     } else {
         console.error("Unexpected response from OpenAI API:", JSON.stringify(data, null, 2));
         return [];
