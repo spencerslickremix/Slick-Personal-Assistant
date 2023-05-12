@@ -31,6 +31,13 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 
 ---
 
+## :pencil: Custom Prompts
+1. Add up to 5 custom Descriptions and Prompts.
+2. Connect your GitHub account to display as many Prompts as you want. See the [ChatGPT Custom Prompts](https://github.com/spencerslickremix/chatGPT-Prompts) and learn how to connect them to the Chrome Extension. 
+
+---
+
+
 ## :gear: Settings
 1. **[API Key](https://platform.openai.com/account/api-keys):** Your OpenAI API key is required to access ChatGPT. Click the API Key link to get yours. You must have an account setup. OpenAI gives you $18 free to start; after that, you will need to add a payment method to continue use. Cheaper than paying $20 a month for ChatGPT Pro.
 2. **Max Tokens:** The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per prompt.
