@@ -2,6 +2,7 @@
 
 ![440x280.png](https://raw.githubusercontent.com/spencerslickremix/slickGPT/main/screenshots/440x280.png)
 
+
 ## :book: Description
 
 A Chrome extension that adds [ChatGPT](https://chat.openai.com) to your browser. It can assist in creating content or code for any website based on your suggestions.
@@ -10,11 +11,15 @@ Pin the Extension to your browser so you can easily use on any tab. It will work
 
 Below are some use cases and also a breakdown of the Custom Options, Settings and their meaning.
 
+---
+
 ## :bulb: Use Cases
 1. Say you are editing your website and want to modify some text, or create a blog post. It would be easier to select that text on your website, have it appear automatically in the popup, and then ask ChatGPT to make the changes you want after the STOP. Once a suggestion(s) appears, click it and the selected text on the page will be replaced. By adjusting the Temperature from the Settings tab, you can have the response be less or more creative.
 2. You don't have to use this in conjunction with a website. You can also simply use it like ChatGPT for having a conversation and creating or modifying code.
 3. Great for writing a creative Tweet that you can easily share on Twitter once you are done.
 4. Useful for creative writing in an email or text message. All you have to do is click the response when you are done, and the text is copied to your clipboard.
+
+---
 
 ## :wrench: Custom Options
 1. Select text on the web page and click the pinned extension; the selected text will automatically be pasted to the textarea in the chrome extension popup.
@@ -24,6 +29,8 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 5. The text will also be added to the clipboard, allowing you to paste it in another tab or anywhere.
 6. **Bonus:** Click the Twitter icon that appears in the top right of a suggestion(s), and it will open Twitter so you can share the suggestion.
 
+---
+
 ## :gear: Settings
 1. **[API Key](https://platform.openai.com/account/api-keys):** Your OpenAI API key is required to access ChatGPT. Click the API Key link to get yours. You must have an account setup. OpenAI gives you $18 free to start; after that, you will need to add a payment method to continue use. Cheaper than paying $20 a month for ChatGPT Pro.
 2. **Max Tokens:** The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per prompt.
@@ -31,6 +38,8 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 4. **Temperature:** Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.
 5. **Type:** GPT-4 or GPT-3
 6. **Mode:** Light or Dark
+
+---
 
 ## :camera: Screenshots
 
@@ -46,8 +55,12 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 
 ![Screenshot 10.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%205.png)
 
+---
+
 ## :rocket: Install
 Simply click the green CODE button near the top right of this repo. Download the ZIP file and unpack it wherever you want on your computer.
+
+---
 
 ### Add the extension
 
@@ -60,6 +73,8 @@ Simply click the green CODE button near the top right of this repo. Download the
 7. Add your own API key by clicking the Settings button.
 
 It's that simple, have fun and enjoy!
+
+---
 
 ## :scroll: License
 2023 MIT © Spencer Labadie . Follow me on <a href="https://twitter.com/SpencerLabadie"><img src="https://img.icons8.com/color/48/000000/twitter.png" width="28"></a>
