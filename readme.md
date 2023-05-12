@@ -34,8 +34,7 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 
 ## :camera: Screenshots
 
-![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main
-/screenshots/Screenshot%206.png)
+![Screenshot 11.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%206.png)
 
 ![Screenshot 1.png](https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/screenshots/Screenshot%201.png)
 
