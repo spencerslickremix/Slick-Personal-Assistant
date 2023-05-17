@@ -1,3 +1,5 @@
+// This script is to allow us to get selected text on the webpage
+// and then copy it to our input field for a quicker user experience.
 if (!window.hasRunContentScript) {
     window.hasRunContentScript = true;
 

@@ -4,13 +4,14 @@
     <link rel="stylesheet" href="layout/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="layout/css/popup.css" media="all">
+    <link rel="stylesheet" href="layout/css/prism.min.css" media="all">
 </head>
-<body>
+<body class="dark-mode">
 <div id="custom-context-menu">
     <div class="saved-prompts-list">
         <div id="saved-custom-prompts-header">Saved Custom Prompts</div>
     </div>
-    <ul><-- custom prompts are inserted here via js --></ul>
+    <ul><!-- custom prompts are inserted here via js --></ul>
 </div>
 
 <div class="settings-overlay hidden">
@@ -141,18 +142,38 @@
                 </label>
                 <input type="text" id="temperature" name="temperature" placeholder="0.1">
 
-                <div class="switch gtp-model-type">
 
+                <div class="switch gtp-model-type switch-wrap">
+                    <div class="switch-description">You must have a GPT-4 API Token for GPT-4 to work.</div>
                     <label>
-                        <div class="gpt-description"><strong>Note:</strong> You must have a GPT-4 API Token for GPT-4 option to work.</div>
-                        <span class="toggle-label">GPT-3 Turbo</span>
+                        <span class="toggle-label">GPT-3</span>
                         <input type="checkbox" id="engineToggle">
                         <span class="lever"></span>
                         <span class="toggle-label">GPT-4</span>
                     </label>
                 </div>
 
-                <div class="switch gtp-mode">
+
+
+
+
+
+                <div class="switch switch-wrap">
+                    <div class="switch-description">Display a Twitter Icon to quickly share responses.</div>
+                    <label>
+                        <span class="toggle-label">Hide</span>
+                        <input type="checkbox" id="shareButtonsToggle">
+                        <span class="lever"></span>
+                        <span class="toggle-label">Show</span>
+                    </label>
+                </div>
+
+
+
+
+
+                <div class="switch switch-wrap">
+                    <div class="switch-description">Quickly change color from Light to Dark.</div>
                     <label>
                         <span class="toggle-label">Light</span>
                         <input type="checkbox" id="darkModeToggle">
@@ -235,7 +256,10 @@
     </div>
 
 </div>
+
 <script src="layout/js/materialize.min.js"></script>
+<script src="layout/js/showdown.min.js"></script>
+<script src="layout/js/prism.min.js"></script>
 <script src="layout/js/popup.js"></script>
 <script src="layout/js/loading-suggestions.js"></script>
 <script src="layout/js/share.js"></script>

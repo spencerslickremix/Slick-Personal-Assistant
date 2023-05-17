@@ -82,13 +82,13 @@ span.slickremix-logo:before {
     white-space: pre-wrap;
     padding: 17px 25px;
     background: #f7f7f7;
-    border: 1px solid #dcd9d9;
     border-radius: 3px;
     font-size: 14px;
     margin: 10px 0;
     word-break: break-word;
     overflow-wrap: break-word;
     position: relative;
+    color: #444;
 }
 
 .suggestion button:focus {
@@ -216,12 +216,16 @@ button:hover, button:focus {
     margin: 30px 0 15px;
 }
 
+#settings-form .submit-button {
+    margin: 15px 0 15px;
+}
+
 .submit-button-suggestions {
     margin: 10px 0 8px;
 }
 
 #temperature {
-    margin-bottom: 5px;
+    margin-bottom: 25px;
 }
 
 .copied-overlay {
@@ -259,7 +263,9 @@ body.dark-mode {
 
 #suggestions-container {
     position: relative;
-    margin-bottom: 110px;
+    margin-bottom: 120px;
+    padding-right:10px;
+    margin-right:-10px;
 }
 
 .loading-animation {
@@ -328,10 +334,24 @@ body.dark-mode {
     opacity: 0;
 }
 
-.gtp-model-type {
-    margin: 20px 0 25px;
+.switch-wrap {
+    margin: 4px 0;
+    padding:5px 15px 25px 25px;
+    background:#f3f3f3;
+}
+.dark-mode .switch-wrap {
+    background:#2c2c2c;
+}
+.switch-description {
+    padding: 15px 0 0;
+    font-size:13px;
+    margin:0 0 15px;
+    color: #2c2b2b;
 }
 
+.dark-mode .switch-description {
+    color: #bebdbd;
+}
 
 .share-container {
     display: flex;
@@ -400,7 +420,7 @@ body.dark-mode {
 }
 
 .dark-mode .suggestion {
-    background-color: #424242;
+    background-color: #313131;
     color: #ffffff;
     border-color: #616161;
 }
@@ -473,7 +493,7 @@ textarea {
 #suggestions-tab.tabcontent {
     display: none;
     flex-grow: 1;
-    padding: 8px; /* Add padding to the content */
+    padding: 0px; /* Add padding to the content */
 }
 
 #submit-button {
@@ -697,4 +717,22 @@ textarea {
 .github-option p {
     padding-left: 8px;
     margin-bottom: 15px;
+}
+
+.suggestion.user-input {
+    background: #ececec;
+}
+
+.dark-mode .user-input {
+    background: #242323;
+    border:none;
+    padding:20px !important;
+}
+
+.user-input .share-container {
+    display:none
+}
+
+script{
+    display:block
 }

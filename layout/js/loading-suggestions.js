@@ -1,37 +1,103 @@
-function createSuggestionElement(text) {
+function urlify(text) {
+    let urlRegex = /(https?:\/\/[^\s]+)/g;
+    let twitterHandleRegex = /(@[a-zA-Z0-9_]{1,15})/g;
+    let twitterHashtagRegex = /(#[a-zA-Z0-9_]+)/g;
+
+    text = text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '" target="_blank">' + url + '</a>';
+    });
+
+    text = text.replace(twitterHandleRegex, function(handle) {
+        let handleWithoutAt = handle.substring(1);
+        return '<a href="https://twitter.com/' + handleWithoutAt + '" target="_blank">' + handle + '</a>';
+    });
+
+    text = text.replace(twitterHashtagRegex, function(hashtag) {
+        let hashtagWithoutHash = encodeURIComponent(hashtag.substring(1));
+        return '<a href="https://twitter.com/hashtag/' + hashtagWithoutHash + '" target="_blank">' + hashtag + '</a>';
+    });
+
+    let codeBlockRegex = /(```[\s\S]*?```)/g;
+    text = text.replace(codeBlockRegex, function(code) {
+        // Convert markdown to HTML
+        let html = new showdown.Converter({backslashEscapesHTMLTags: true}).makeHtml(code);
+
+        return html;
+    });
+
+    return text;
+}
+
+
+
+
+function createSuggestionElement(suggestionObj) {
     const suggestion = document.createElement("div");
     suggestion.classList.add("suggestion");
-    suggestion.textContent = text;
+
+    if (suggestionObj.isUserInput) {
+        suggestion.classList.add("user-input");
+    }
+
+    suggestion.innerHTML = urlify(suggestionObj.text);
 
     // Add an event listener to the suggestion element
     suggestion.addEventListener('click', (e) => {
-
-        replaceSelectedTextOnActiveTab(text);
-        // need to make option to copy to clip board if the option is not a input textarea of contenteditable div.
-        // copyToClipboard(text);
+        replaceSelectedTextOnActiveTab(suggestionObj.text);
         showCopiedOverlay(e.target);
     });
 
-    const shareButtons = createShareButtons([text]); // Wrap the text in an array
-    suggestion.appendChild(shareButtons);
+    const shareButtons = createShareButtons([suggestionObj.text]);
+
+    chrome.storage.sync.get('showShareButtons', (data) => {
+        if (data.showShareButtons) {
+            const shareButtons = createShareButtons([suggestionObj.text]);
+            suggestion.appendChild(shareButtons);
+        }
+    });
 
     return suggestion;
 }
 
-function displaySuggestions(suggestions) {
-    const suggestionsContainer = document.getElementById("suggestions-container");
-    // suggestionsContainer.innerHTML = "";
 
-    for (const suggestion of suggestions) {
-        const suggestionElement = createSuggestionElement(suggestion);
+
+function displaySuggestions(inputTextObj, suggestions) {
+    const suggestionsContainer = document.getElementById("suggestions-container");
+
+    if (inputTextObj) {
+        const inputTextElement = createSuggestionElement(inputTextObj);
+        suggestionsContainer.appendChild(inputTextElement);
+    }
+
+    for (const suggestionObj of suggestions) {
+        const suggestionElement = createSuggestionElement(suggestionObj);
         suggestionsContainer.appendChild(suggestionElement);
     }
 
-    // Save the suggestions to local storage
-    chrome.storage.local.set({ savedSuggestions: suggestions }, function () {
-        console.log("Suggestions saved.");
-    });
+    // Call Prism.highlightAll() after the content has been added to the DOM
+    Prism.highlightAll();
 
+    chrome.storage.local.get(['savedSuggestions'], function(result) {
+        let existingSuggestions = result.savedSuggestions;
+        if (existingSuggestions === undefined) {
+            existingSuggestions = [];
+        }
+
+        // Add input text to existingSuggestions
+        if (inputTextObj) {
+            existingSuggestions.push(inputTextObj);
+        }
+
+        // Add all new suggestions to existingSuggestions
+        suggestions.forEach(suggestionObj => {
+            existingSuggestions.push(suggestionObj);
+        });
+
+        // Save the updated list back to storage
+        chrome.storage.local.set({ savedSuggestions: existingSuggestions }, function () {
+            console.log("Suggestions saved.");
+        });
+    });
 
     // Show or hide the "Clear" button
     const clearButton = document.getElementById("clear-button");
@@ -44,8 +110,30 @@ function displaySuggestions(suggestions) {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function showLoadingAnimation() {
     const suggestionsContainer = document.getElementById("suggestions-container");
+    // this will clear the suggestions if you click the Get Suggestions button.
     // suggestionsContainer.innerHTML = ""; // Clear the suggestions container
 
     const loadingAnimation = document.createElement("div");

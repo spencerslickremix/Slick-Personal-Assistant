@@ -180,6 +180,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+    document.getElementById('shareButtonsToggle').addEventListener('change', (event) => {
+        chrome.storage.sync.set({ showShareButtons: event.target.checked });
+    });
+
+    chrome.storage.sync.get('showShareButtons', (data) => {
+        document.getElementById('shareButtonsToggle').checked = data.showShareButtons;
+    });
+
+
+
+
 
 
 
@@ -334,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Custom context menu settings form not found");
     }
 
-// Load the custom context menu settings when the popup is opened
+    // Load the custom context menu settings when the popup is opened
     chrome.storage.sync.get("customContextMenuPrompts", (result) => {
         const prompts = result.customContextMenuPrompts || [];
         for (let i = 1; i <= 5; i++) {
@@ -370,6 +381,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+
     // Define the "adjustTextarea" function to resize the textarea
     const textarea = document.querySelector('#input-text');
     const submitBtn = document.querySelector('#submit-button');
@@ -395,8 +407,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("darkModeToggle").addEventListener("change", function() {
         document.body.classList.toggle("dark-mode", this.checked);
     });
-
-
 
 
 
@@ -442,7 +452,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-
+    // This gets the saved text that might be in the input should the user close the popup and reopen.
     chrome.storage.local.get("savedText", function (data) {
         inputText.value = data.savedText || "";
 
@@ -474,9 +484,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // Open the Suggestions tab by default
-    openTab("suggestions-tab");
-    document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+    if (!document.getElementById("api-key").value) {
+        // If api-key is blank, open settings-tab
+        openTab("settings-tab");
+        document.querySelector('[data-tab="settings-tab"]').classList.add("active");
+    } else {
+        // If api-key has some value, open suggestions-tab
+        openTab("suggestions-tab");
+        document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+    }
 
     var inputs = document.querySelectorAll('input');
 
@@ -499,6 +515,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add a cancel flag
     let cancelRequest = false;
 
+
+
+
+
+
+
+
+
+
+
+
+
+    // Start Suggestions and adding them to storage using my sendMessageToBackground function.
     const submitButton = document.getElementById("submit-button");
     if (submitButton) {
         submitButton.addEventListener("click", async () => {
@@ -509,9 +538,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     showOverlay("Type text below...");
                     return;
                 }
-
                 try {
-                    const inputText = document.getElementById("input-text").value;
+                    // Display the input text as a suggestion right away
+                    const inputTextObj = { text: inputText, isUserInput: true };
+                    displaySuggestions(inputTextObj, []);
 
                     const loadingAnimation = showLoadingAnimation();
                     scrollToLoadingAnimation(loadingAnimation);
@@ -521,15 +551,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     const engine = document.getElementById("engineToggle").checked ? 'gpt4' : 'gpt3';
                     const response = await sendMessageToBackground(inputText, { action: "getSuggestions", engine });
                     if (!cancelRequest) {
-                        const suggestions = response.suggestions || [];
-                        displaySuggestions(suggestions);
+                        const suggestions = response.suggestions.map(suggestion => ({ text: suggestion, isUserInput: false }));
+                        displaySuggestions(null, suggestions);
                     }
                 } catch (error) {
-                        console.error("Error:", error.message);
-                        displaySuggestions([`Error: ${error.message}`]);
+                    console.error("Error:", error.message);
+                    displaySuggestions(`Error: ${error.message}`, []);
                 } finally {
                     hideLoadingAnimation();
                     submitButton.innerText = "Get Suggestions";
+                    // Clear the input-text field
+                    document.getElementById("input-text").value = "";
                 }
             } else {
                 cancelRequest = true;
@@ -542,14 +574,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+    // Clear Suggestions from container and storage
     const clearButton = document.getElementById("clear-button");
     if (clearButton) {
         clearButton.addEventListener("click", () => {
             // Clear the suggestions
-             displaySuggestions([]);
             const suggestionsContainer = document.getElementById("suggestions-container");
             suggestionsContainer.innerHTML = ""; // Clear the suggestions container
 
+            // Also clear the saved suggestions in local storage
+            chrome.storage.local.remove('savedSuggestions', function() {
+                console.log('Saved suggestions cleared.');
+            });
+
+            // Not using but keeping because I might possible create another option to clear this field
+            // or remove all together because I'm going to make the suggestions add the text entered like a real chat.
             // Clear the input field
             /*const inputText = document.getElementById("input-text");
             inputText.value = "";*/
@@ -558,10 +597,41 @@ document.addEventListener("DOMContentLoaded", function () {
             /*chrome.storage.local.set({ savedText: "" }, function () {
                 console.log("Text cleared.");
             });*/
+
         });
+
+
+        // Scroll to the bottom of the suggestionsContainer
+        setTimeout(() => {
+            const suggestionsContainer = document.getElementById("suggestions-container");
+            suggestionsContainer.scrollTop = suggestionsContainer.scrollHeight;
+        }, 0);
+
+
+
     } else {
         console.error('clear-button not found');
     }
+
+}); // End addEventListener("DOMContentLoaded")
+
+
+
+// This needs to be out of the addEventListener("DOMContentLoaded") so the
+// custom context menu will not load if there are suggestions in the local storage
+// that need to be loaded.
+// Get Saved Suggestions from local storage if there before anything else.
+chrome.storage.local.get("savedSuggestions", function (data) {
+    console.log(data);
+    const suggestions = data.savedSuggestions || [];
+    const suggestionsContainer = document.getElementById("suggestions-container");
+    suggestions.forEach(suggestionObj => {
+        const suggestionElement = createSuggestionElement(suggestionObj);
+        suggestionsContainer.appendChild(suggestionElement);
+        // Call Prism.highlightAll() after the content has been added to the DOM
+        Prism.highlightAll();
+    });
+
 });
 
 
@@ -619,16 +689,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("n").value = result.n || '';
         document.getElementById("stop").value = result.stop || '';
         document.getElementById("temperature").value = result.temperature || '';
-        document.getElementById("darkModeToggle").checked = result.darkMode || false;
-        document.body.classList.toggle("dark-mode", result.darkMode);
+
+        document.getElementById("darkModeToggle").checked = result.darkMode || true;
+        // document.body.classList.toggle("dark-mode", result.darkMode);
+        if (result.darkMode === false) {
+            document.body.classList.remove("dark-mode");
+        }
         document.getElementById("engineToggle").checked = result.engine === 'gpt4';
     });
 })();
 
-chrome.storage.local.get("savedSuggestions", function (data) {
-    const suggestions = data.savedSuggestions || [];
-    displaySuggestions(suggestions);
-});
 
 
 // Add this function to copy text to the clipboard
