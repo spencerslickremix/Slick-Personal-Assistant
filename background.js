@@ -12,7 +12,6 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
         throw new Error("API key not provided. Please enter your API key in the settings.");
     }
 
-
     const model = engine === 'gpt3' ? 'gpt-3.5-turbo' : 'gpt-4';
 
     const engineURL = 'https://api.openai.com/v1/chat/completions';

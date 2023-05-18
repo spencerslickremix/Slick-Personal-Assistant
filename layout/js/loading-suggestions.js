@@ -28,9 +28,6 @@ function urlify(text) {
     return text;
 }
 
-
-
-
 function createSuggestionElement(suggestionObj) {
     const suggestion = document.createElement("div");
     suggestion.classList.add("suggestion");
@@ -109,27 +106,6 @@ function displaySuggestions(inputTextObj, suggestions) {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function showLoadingAnimation() {
     const suggestionsContainer = document.getElementById("suggestions-container");

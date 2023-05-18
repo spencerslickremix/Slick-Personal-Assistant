@@ -126,10 +126,6 @@ function updateCustomContextMenuOptions() {
     });
 }
 
-
-
-
-
 // https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api?apiVersion=2022-11-28
 async function fetchReadmeFromRepo(repoUrl) {
     const response = await fetch(repoUrl);
@@ -171,14 +167,9 @@ function loadPromptsFromChromeStorage() {
     });
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
 
     updateCustomContextMenuOptions();
-
-
 
     document.getElementById('shareButtonsToggle').addEventListener('change', (event) => {
         chrome.storage.sync.set({ showShareButtons: event.target.checked });
@@ -187,12 +178,6 @@ document.addEventListener("DOMContentLoaded", function () {
     chrome.storage.sync.get('showShareButtons', (data) => {
         document.getElementById('shareButtonsToggle').checked = data.showShareButtons;
     });
-
-
-
-
-
-
 
     document.getElementById("useGithubToggle").addEventListener("change", function () {
         const useGithub = this.checked;
@@ -238,19 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // Get the hamburger menu and settings overlay elements
     const hamburgerMenu = document.querySelector(".hamburger-menu");
     const settingsOverlay = document.querySelector(".settings-overlay");
@@ -272,12 +244,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-
-
-
-
-
-
     document.body.addEventListener("contextmenu", function (event) {
         if (event.target.closest('#suggestions-container') || event.target.closest('#custom-context-menu-directions')) {
             event.preventDefault();
@@ -285,13 +251,6 @@ document.addEventListener("DOMContentLoaded", function () {
             showCustomContextMenu();
         }
     });
-
-
-
-
-
-
-
 
     // Hide the custom context menu when clicking outside of it
     document.addEventListener('click', (e) => {
@@ -408,10 +367,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.toggle("dark-mode", this.checked);
     });
 
-
-
-
-
     // Function to show the custom context menu
     function showCustomContextMenu() {
         const customContextMenu = document.getElementById("custom-context-menu");
@@ -484,15 +439,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    if (!document.getElementById("api-key").value) {
-        // If api-key is blank, open settings-tab
-        openTab("settings-tab");
-        document.querySelector('[data-tab="settings-tab"]').classList.add("active");
-    } else {
-        // If api-key has some value, open suggestions-tab
-        openTab("suggestions-tab");
-        document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
-    }
 
     var inputs = document.querySelectorAll('input');
 
@@ -514,18 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add a cancel flag
     let cancelRequest = false;
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Start Suggestions and adding them to storage using my sendMessageToBackground function.
     const submitButton = document.getElementById("submit-button");
@@ -607,14 +541,11 @@ document.addEventListener("DOMContentLoaded", function () {
             suggestionsContainer.scrollTop = suggestionsContainer.scrollHeight;
         }, 0);
 
-
-
     } else {
         console.error('clear-button not found');
     }
 
 }); // End addEventListener("DOMContentLoaded")
-
 
 
 // This needs to be out of the addEventListener("DOMContentLoaded") so the
@@ -633,20 +564,6 @@ chrome.storage.local.get("savedSuggestions", function (data) {
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 (async () => {
     // Wrap the event listener assignment in a DOMContentLoaded event listener
@@ -691,12 +608,29 @@ chrome.storage.local.get("savedSuggestions", function (data) {
         document.getElementById("temperature").value = result.temperature || '';
 
         document.getElementById("darkModeToggle").checked = result.darkMode || true;
-        // document.body.classList.toggle("dark-mode", result.darkMode);
         if (result.darkMode === false) {
             document.body.classList.remove("dark-mode");
         }
         document.getElementById("engineToggle").checked = result.engine === 'gpt4';
+
+        // Add your tab selection logic here
+        // Remove active class from all tab links
+        const tablinks = document.querySelectorAll(".tablinks");
+        tablinks.forEach((tab) => {
+            tab.classList.remove("active");
+        });
+
+        if (!result.apiKey) {
+            // If api-key is blank, open settings-tab
+            openTab("settings-tab");
+            document.querySelector('[data-tab="settings-tab"]').classList.add("active");
+        } else {
+            // If api-key has some value, open suggestions-tab
+            openTab("suggestions-tab");
+            document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+        }
     });
+
 })();
 
 
@@ -737,6 +671,28 @@ document.querySelectorAll(".tablinks").forEach((tab) => {
 });
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
+    const customPromptsLink = document.getElementById('customPromptsLink');
+    const suggestionsLink = document.getElementById('suggestionsLink');
+
+    if (customPromptsLink) {
+        customPromptsLink.addEventListener('click', () => {
+            openTab("custom-context-menu-settings-tab");
+            document.querySelector('[data-tab="custom-context-menu-settings-tab"]').classList.add("active");
+        });
+    } else {
+        console.error('customPromptsLink not found');
+    }
+
+    if (suggestionsLink) {
+        suggestionsLink.addEventListener('click', () => {
+            openTab("suggestions-tab");
+            document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+        });
+    } else {
+        console.error('suggestionsLink not found');
+    }
+
     const savedPromptsHeader = document.getElementById('saved-custom-prompts-header');
     const customContextMenuOption = document.querySelector('.custom-context-menu-option');
 

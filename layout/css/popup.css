@@ -95,6 +95,7 @@ span.slickremix-logo:before {
     outline: none;
     background: none !important;
 }
+
 button:focus {
     outline: none;
 }
@@ -264,8 +265,8 @@ body.dark-mode {
 #suggestions-container {
     position: relative;
     margin-bottom: 120px;
-    padding-right:10px;
-    margin-right:-10px;
+    padding-right: 10px;
+    margin-right: -10px;
 }
 
 .loading-animation {
@@ -336,16 +337,18 @@ body.dark-mode {
 
 .switch-wrap {
     margin: 4px 0;
-    padding:5px 15px 25px 25px;
-    background:#f3f3f3;
+    padding: 5px 15px 25px 25px;
+    background: #f3f3f3;
 }
+
 .dark-mode .switch-wrap {
-    background:#2c2c2c;
+    background: #2c2c2c;
 }
+
 .switch-description {
     padding: 15px 0 0;
-    font-size:13px;
-    margin:0 0 15px;
+    font-size: 13px;
+    margin: 0 0 15px;
     color: #2c2b2b;
 }
 
@@ -725,14 +728,19 @@ textarea {
 
 .dark-mode .user-input {
     background: #242323;
-    border:none;
-    padding:20px !important;
+    border: none;
+    padding: 20px !important;
 }
 
 .user-input .share-container {
-    display:none
+    display: none
 }
 
-script{
-    display:block
+script {
+    display: block
+}
+
+#customPromptsLink, #suggestionsLink {
+    color: #03A9F4;
+    cursor: pointer;
 }

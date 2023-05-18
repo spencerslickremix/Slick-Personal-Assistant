@@ -15,7 +15,8 @@ Pin the Extension to your browser so you can easily use on any tab. It will work
 - Number of Tokens
 - Alternative Completions
 - Temperature
-- Light and Dark Mode.
+- Twitter Share Suggestion Icon
+- Light and Dark Mode
 
 Below are some use cases and also a breakdown of the Custom Options, Settings and their meaning.
 
@@ -26,6 +27,7 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 2. You don't have to use this in conjunction with a website. You can also simply use it like ChatGPT for having a conversation and creating or modifying code.
 3. Great for writing a creative Tweet that you can easily share on Twitter once you are done.
 4. Useful for creative writing in an email or text message. All you have to do is click the response when you are done, and the text is copied to your clipboard.
+5. Quickly Translate Text.
 
 ---
 
@@ -41,7 +43,7 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 
 ## :pencil: Custom Prompts
 1. Add up to 5 custom Descriptions and Prompts.
-2. Connect your GitHub account to display as many Prompts as you want. See the [ChatGPT Custom Prompts](https://github.com/spencerslickremix/chatGPT-Prompts) and learn how to connect them to the Chrome Extension. 
+2. Connect a GitHub account to display as many Prompts as you want. See the [ChatGPT Custom Prompts](https://github.com/spencerslickremix/chatGPT-Prompts) and learn how to connect them to the Chrome Extension. 
 
 ---
 
@@ -52,7 +54,8 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 3. **Alternative Completions:** The number of alternative completions to generate for each prompt.
 4. **Temperature:** Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.
 5. **Type:** GPT-4 or GPT-3
-6. **Mode:** Light or Dark
+6. **Share:** Twitter Share option for Suggestions.
+7  **Mode:** Light or Dark
 
 ---
 
