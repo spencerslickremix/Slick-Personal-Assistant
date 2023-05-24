@@ -1,0 +1,23 @@
+= Version 0.0.3 Wednesday, May 24st, 2023 =
+ * New: Added Token Count to the Suggestions tab so users can see how many tokens are used per response. This text will also link you directly to the Settings page for quicker navigation.
+ * New: SlickRemix logo in header now links to the website and the text "Your Personal Automated Assistant" now links to the Suggestions tab for quicker navigation.
+ * Updated: Settings description for Max Tokens and Temperature to be clearer.
+ * Fixed: Dark Mode toggle was defaulting on even when Light mode was set.
+ * Fixed: Added additional checks to Regex to parse URLs properly. Probably end up adding a library in the future.
+ * Fixed: Added error messages to the suggestion list so users know when there is a problem.
+ * Fixed: Added GPT-4 specific error message to users know if the API token they have entered will work with GPT-4 if they chose that model.
+ * Removed: content_scripts: matches": ["http://*/*", "https://*/*"] & js": ["contentScript.js"]. These options were not needed because I am calling chrome.scripting.executeScript from the popup.js file already so the call was being duplicated.
+
+= Version 0.0.2 Thursday, May 18th, 2023 =
+ * New: Replaced model davinci-003 with gpt-3.5-turbo
+ * New: Updated completions to use /chat/completions
+ * New: Save user and response text to array to chrome.storage
+ * New: Complete UI change. Made Dark Mode true by default now.
+ * New: Regex to parse URLs properly.
+ * New: Settings: Display Twitter icon to quickly share responses.
+ * New: Custom Prompts tab. Includes the option to add up to 5 custom prompts or chose to display prompts saved from a GitHub accounts readme.md file.
+ * New: Showdown.js to convert code to HTML and Prism.js to beatify the code.
+ * Removed: permissions: tabs. Was not actually needed and was warned by Google it needed to be removed.
+
+= Version 0.0.1 Monday, May 2nd, 2023 =
+ * Initial Release

@@ -1,174 +1,7 @@
-// Wrap the entire code block with an IIFE to avoid conflicts and isolate the scope
-// This is for the custom context menu items.
-(function () {
-    // Declare the customContextMenu variable and assign the element reference
-    const customContextMenu = document.querySelector('#custom-context-menu');
-
-    const onClickHandler = (event) => {
-        const target = event.target;
-
-        if (target.tagName.toLowerCase() === 'li') {
-            event.stopPropagation(); // Prevent event bubbling
-
-            // Replace the "STOP:" text with the selected prompt
-            const selectedPrompt = target.getAttribute("value");
-            const textarea = document.getElementById('input-text');
-            const stopIndex = textarea.value.indexOf('STOP:');
-
-            if (stopIndex !== -1) {
-                // Replace "STOP:" with the selected prompt
-                textarea.setRangeText(selectedPrompt, stopIndex, stopIndex + 5, 'select');
-            } else {
-                // Insert the selected prompt after a line break
-                const insertionIndex = textarea.value.length;
-                // textarea.setRangeText('\n' + selectedPrompt, insertionIndex, insertionIndex, 'select');
-                textarea.setRangeText( selectedPrompt, insertionIndex, insertionIndex, 'select');
-            }
-            document.getElementById('submit-button').click();
-        }
-    };
-
-    if (customContextMenu) {
-        customContextMenu.removeEventListener('click', onClickHandler);
-        customContextMenu.addEventListener('click', onClickHandler);
-    }
-})();
-
-function convertRepoUrlToApiUrl(repoUrl) {
-    // Remove trailing slash if present
-    if (repoUrl.endsWith('/')) {
-        repoUrl = repoUrl.slice(0, -1);
-    }
-
-    // Extract the username and repository name from the URL
-    const repoPath = new URL(repoUrl).pathname;
-    const [username, repoName] = repoPath.split('/').filter(Boolean);
-
-    // Construct and return the GitHub API URL for the README.md file
-    return `https://api.github.com/repos/${username}/${repoName}/contents/README.md`;
-}
-
-function updateCustomContextMenuOptions() {
-    chrome.storage.sync.get(["useGithub", "githubUrl"], async (result) => {
-        const useGithub = result.useGithub || false;
-        const githubUrl = result.githubUrl || "";
-        let prompts = [];
-
-        const customContextMenuList = document.querySelector("#custom-context-menu > ul");
-        const customContextMenu = document.querySelector("#custom-context-menu");
-        customContextMenu.style.opacity = '0'; // hide the list initially
-
-        if (useGithub && githubUrl) {
-            const apiUrl = convertRepoUrlToApiUrl(githubUrl);
-            try {
-                const readmeContent = await fetchReadmeFromRepo(apiUrl);
-                prompts = parseReadmeContent(readmeContent);
-            } catch (error) {
-                console.error("Error fetching prompts from the repo:", error.message);
-                prompts = await loadPromptsFromChromeStorage();
-            }
-        } else {
-            prompts = await loadPromptsFromChromeStorage();
-        }
-
-        // Filter out empty prompts
-        const promptsCheck = prompts.filter(prompt => prompt.description !== "" && prompt.value !== "");
-
-        // Debugging alert to display the value of prompts
-        // alert('Value of prompts: ' + JSON.stringify(prompts));
-
-        // If there are no prompts, return from the function early
-        if ( promptsCheck.length === 0) {
-            // alert('No prompts found'); // Debugging alert
-            // Do not show the conte
-            customContextMenu.style.display = "none";
-            return;
-        }
-
-        const savedPromptsList = document.querySelector(".saved-prompts-list");
-
-        // Check if there's already an a element in savedPromptsList, if not create one.
-        let linkElement = savedPromptsList.querySelector("a");
-        if (!linkElement) {
-            linkElement = document.createElement("a");
-            savedPromptsList.appendChild(linkElement);
-        }
-
-        // Set properties of the link element
-        linkElement.textContent = "Saved GitHub Prompts";
-        linkElement.style.display = useGithub ? "block" : "none";  // display only when useGithub is true
-        if (useGithub) {
-            linkElement.href = githubUrl;
-
-            const savedCustomPromptsHeader = document.getElementById("saved-custom-prompts-header");
-            savedCustomPromptsHeader.style.display = "none";
-        }
-        else {
-            const savedCustomPromptsHeader = document.getElementById("saved-custom-prompts-header");
-            savedCustomPromptsHeader.style.display = "block";
-        }
-
-        linkElement.target = "_blank"; // to open in a new tab
-
-        customContextMenuList.innerHTML = "";
-
-        prompts.forEach((prompt, index) => {
-            const listItem = document.createElement("li");
-            listItem.id = `option-${index}`;
-            listItem.textContent = prompt.description;
-            listItem.setAttribute("value", prompt.value);
-            customContextMenuList.appendChild(listItem);
-        });
-
-        setTimeout(() => {
-            customContextMenu.style.opacity = '1'; // fade the menu in after a delay
-        }, 200); // adjust delay as needed
-    });
-}
-
-// https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api?apiVersion=2022-11-28
-async function fetchReadmeFromRepo(repoUrl) {
-    const response = await fetch(repoUrl);
-    const data = await response.json();
-    // Decode the base64 encoded content
-    return atob(data.content);
-}
-
-function parseReadmeContent(content) {
-    const lines = content.split('\n');
-    const prompts = [];
-    let startParsing = false;  // flag to indicate when to start parsing
-
-    lines.forEach(line => {
-        // check if the current line starts with a dash (-)
-        if (line.trim().startsWith('-')) {
-            startParsing = true;  // start parsing from the current line
-        }
-
-        // if startParsing is true, parse the line
-        if (startParsing) {
-            const match = line.match(/^\-\s(.+):\s(.+)$/);
-            if (match) {
-                prompts.push({ description: match[1], value: match[2] });
-            }
-        }
-    });
-
-    return prompts;
-}
-
-
-function loadPromptsFromChromeStorage() {
-    return new Promise((resolve) => {
-        chrome.storage.sync.get("customContextMenuPrompts", (result) => {
-            const prompts = result.customContextMenuPrompts || [];
-            resolve(prompts);
-        });
-    });
-}
-
+// All these action and function happen when the popup is opened.
 document.addEventListener("DOMContentLoaded", function () {
 
+    refreshTokenCount();
     updateCustomContextMenuOptions();
 
     document.getElementById('shareButtonsToggle').addEventListener('change', (event) => {
@@ -186,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Show or hide the GitHub URL input field based on the toggle state
-        const githubUrlContainer    = document.getElementById("githubUrlContainer");
+        // const githubUrlContainer    = document.getElementById("githubUrlContainer");
         const customPromptContainer = document.getElementById("customPromptContainer");
         if (useGithub) {
             // githubUrlContainer.style.display = "block";
@@ -354,6 +187,12 @@ document.addEventListener("DOMContentLoaded", function () {
         textarea.style.height = `${textarea.scrollHeight}px`;
     }
 
+    document.addEventListener('click', function(event) {
+        if (event.target !== submitBtn && event.target !== textarea) {
+            resetTextareaHeight();
+        }
+    });
+
     function resetTextareaHeight() {
         textarea.style.height = 'auto';
     }
@@ -466,14 +305,12 @@ document.addEventListener("DOMContentLoaded", function () {
     if (submitButton) {
         submitButton.addEventListener("click", async () => {
             if (submitButton.innerText === "Get Suggestions") {
-
                 const inputText = document.getElementById("input-text").value;
                 if (inputText.trim() === "") {
                     showOverlay("Type text below...");
                     return;
                 }
                 try {
-                    // Display the input text as a suggestion right away
                     const inputTextObj = { text: inputText, isUserInput: true };
                     displaySuggestions(inputTextObj, []);
 
@@ -484,17 +321,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     cancelRequest = false;
                     const engine = document.getElementById("engineToggle").checked ? 'gpt4' : 'gpt3';
                     const response = await sendMessageToBackground(inputText, { action: "getSuggestions", engine });
+
                     if (!cancelRequest) {
+                        // If there is no error message, display the suggestions
                         const suggestions = response.suggestions.map(suggestion => ({ text: suggestion, isUserInput: false }));
                         displaySuggestions(null, suggestions);
                     }
                 } catch (error) {
                     console.error("Error:", error.message);
-                    displaySuggestions(`Error: ${error.message}`, []);
+                    const errorMessage = { text: `Error: ${error.message}`, isUserInput: false };
+                    displaySuggestions(null, [errorMessage]);
+
                 } finally {
                     hideLoadingAnimation();
                     submitButton.innerText = "Get Suggestions";
-                    // Clear the input-text field
                     document.getElementById("input-text").value = "";
                 }
             } else {
@@ -505,7 +345,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error('submit-button not found');
     }
-
 
 
     // Clear Suggestions from container and storage
@@ -521,49 +360,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log('Saved suggestions cleared.');
             });
 
-            // Not using but keeping because I might possible create another option to clear this field
-            // or remove all together because I'm going to make the suggestions add the text entered like a real chat.
-            // Clear the input field
-            /*const inputText = document.getElementById("input-text");
-            inputText.value = "";*/
-
-            // Clear the savedText in chrome.storage.local
-            /*chrome.storage.local.set({ savedText: "" }, function () {
-                console.log("Text cleared.");
-            });*/
+            // Clear conversation and reset token count
+            chrome.runtime.sendMessage({ action: 'clearConversationAndTokenCount' }, function(response) {
+                console.log(response.message);
+                refreshTokenCount(); // refresh the token count after it's cleared
+            });
 
         });
-
-
-        // Scroll to the bottom of the suggestionsContainer
-        setTimeout(() => {
-            const suggestionsContainer = document.getElementById("suggestions-container");
-            suggestionsContainer.scrollTop = suggestionsContainer.scrollHeight;
-        }, 0);
-
-    } else {
-        console.error('clear-button not found');
     }
 
+    // Scroll to the bottom of the suggestionsContainer
+    setTimeout(() => {
+        const suggestionsContainer = document.getElementById("suggestions-container");
+        suggestionsContainer.scrollTop = suggestionsContainer.scrollHeight;
+    }, 0);
+
+
 }); // End addEventListener("DOMContentLoaded")
-
-
-// This needs to be out of the addEventListener("DOMContentLoaded") so the
-// custom context menu will not load if there are suggestions in the local storage
-// that need to be loaded.
-// Get Saved Suggestions from local storage if there before anything else.
-chrome.storage.local.get("savedSuggestions", function (data) {
-    console.log(data);
-    const suggestions = data.savedSuggestions || [];
-    const suggestionsContainer = document.getElementById("suggestions-container");
-    suggestions.forEach(suggestionObj => {
-        const suggestionElement = createSuggestionElement(suggestionObj);
-        suggestionsContainer.appendChild(suggestionElement);
-        // Call Prism.highlightAll() after the content has been added to the DOM
-        Prism.highlightAll();
-    });
-
-});
 
 (async () => {
     // Wrap the event listener assignment in a DOMContentLoaded event listener
@@ -607,7 +420,7 @@ chrome.storage.local.get("savedSuggestions", function (data) {
         document.getElementById("stop").value = result.stop || '';
         document.getElementById("temperature").value = result.temperature || '';
 
-        document.getElementById("darkModeToggle").checked = result.darkMode || true;
+        document.getElementById("darkModeToggle").checked = result.darkMode || false;
         if (result.darkMode === false) {
             document.body.classList.remove("dark-mode");
         }
@@ -673,24 +486,32 @@ document.querySelectorAll(".tablinks").forEach((tab) => {
 window.addEventListener('DOMContentLoaded', (event) => {
 
     const customPromptsLink = document.getElementById('customPromptsLink');
-    const suggestionsLink = document.getElementById('suggestionsLink');
+    const suggestionsLink = document.getElementsByClassName('suggestionsLink');
+    const settingsLink = document.getElementsByClassName('settingsLink');
 
     if (customPromptsLink) {
         customPromptsLink.addEventListener('click', () => {
             openTab("custom-context-menu-settings-tab");
             document.querySelector('[data-tab="custom-context-menu-settings-tab"]').classList.add("active");
         });
-    } else {
-        console.error('customPromptsLink not found');
     }
 
-    if (suggestionsLink) {
-        suggestionsLink.addEventListener('click', () => {
-            openTab("suggestions-tab");
-            document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
-        });
-    } else {
-        console.error('suggestionsLink not found');
+    if (suggestionsLink && suggestionsLink.length > 0) {
+        for(let i = 0; i < suggestionsLink.length; i++) {
+            suggestionsLink[i].addEventListener('click', () => {
+                openTab("suggestions-tab");
+                document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+            });
+        }
+    }
+
+    if (settingsLink && settingsLink.length > 0) {
+        for(let i = 0; i < settingsLink.length; i++) {
+            settingsLink[i].addEventListener('click', () => {
+                openTab("settings-tab");
+                document.querySelector('[data-tab="settings-tab"]').classList.add("active");
+            });
+        }
     }
 
     const savedPromptsHeader = document.getElementById('saved-custom-prompts-header');
@@ -700,9 +521,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         savedPromptsHeader.addEventListener('click', () => {
             customContextMenuOption.click();
         });
-    } else {
-        console.error('Cannot find elements to add event listeners to');
     }
+
 });
 
 
@@ -733,7 +553,8 @@ function getSelectedTextFromActiveTab() {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { action: "getSelectedText" }, (response) => {
-            if (response.trim() !== "") {
+            // Check if response exists before trying to trim it
+            if (response && response.trim() !== "") {
                 const inputText = document.getElementById("input-text");
                 inputText.value = response + '\n\n' + 'STOP: ';
 
@@ -750,13 +571,11 @@ function getSelectedTextFromActiveTab() {
                     const customContextMenu = document.getElementById("custom-context-menu");
                     customContextMenu.style.display = "none";
                 }
-            } else {
-                // Perform the desired action when there is no selected text, such as displaying a message
-                console.log("No selected text on the page.");
             }
         });
     });
 }
+
 
 
 function replaceSelectedTextOnActiveTab(replacementText) {

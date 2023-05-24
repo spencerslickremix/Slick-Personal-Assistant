@@ -32,9 +32,26 @@ span.slickremix-logo:before {
     font-style: italic;
     font-size: 15px;
 }
-
+.suggestionsLink.slickremix-title {
+    color: #ffffff;
+}
+.dark-mode .suggestionsLink.slickremix-title {
+    color: #c0c0c0;
+}
+.dark-mode .suggestionsLink.slickremix-title:focus {
+    color: #ffffff;
+}
+.header a:focus-visible {
+    outline:none;
+}
 .dark-mode span.slickremix-logo:before {
     color: #e42635;
+}
+.header a:focus span.slickremix-logo:before {
+    color: #e42635;
+}
+.dark-mode a:focus span.slickremix-logo:before {
+    color: #f8f8f8;
 }
 
 .header {
@@ -102,6 +119,9 @@ button:focus {
 
 .submit-button-suggestions:focus, .submit-button:focus {
     background: #015cb9;
+}
+.submit-button-suggestions:focus, .submit-button:focus {
+    background: #027af5;
 }
 
 .tablinks:hover:not(.active) {
@@ -418,7 +438,7 @@ body.dark-mode {
 
 .dark-mode textarea,
 .dark-mode input[type="text"] {
-    color: #ffffff;
+    color: #cac9c9;
     border-color: #616161;
 }
 
@@ -544,7 +564,7 @@ textarea {
     padding: 5px;
     list-style: none;
     overflow: auto;
-    max-height: 300px;
+    max-height: 298px;
 }
 
 #custom-context-menu li {
@@ -723,13 +743,14 @@ textarea {
 }
 
 .suggestion.user-input {
-    background: #ececec;
+    background: #f1f1f100;
 }
 
 .dark-mode .user-input {
     background: #242323;
     border: none;
     padding: 20px !important;
+    color: #cac9c9;
 }
 
 .user-input .share-container {
@@ -740,7 +761,18 @@ script {
     display: block
 }
 
-#customPromptsLink, #suggestionsLink {
+#customPromptsLink, .suggestionsLink {
     color: #03A9F4;
     cursor: pointer;
+}
+#token-count {
+    color: #c2bebe;
+    position:relative;
+    top:22px;
+    font-size:14px;
+    float:right;
+    cursor: pointer;
+}
+.dark-mode #token-count {
+    color: #666565;
 }

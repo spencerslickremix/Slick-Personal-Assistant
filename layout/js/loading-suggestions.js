@@ -1,17 +1,34 @@
 function urlify(text) {
-    let urlRegex = /(https?:\/\/[^\s]+)/g;
-    let twitterHandleRegex = /(@[a-zA-Z0-9_]{1,15})/g;
-    let twitterHashtagRegex = /(#[a-zA-Z0-9_]+)/g;
+
+    // Here are a few examples of the URLs that this regex would capture:
+    // https://www.example.com
+    // http://www.example.com
+    // https://www.example.com/path/to/resource
+    // https://www.example.com?query=string
+    // https://www.example.com#fragment
+    // https://sub-domain.example.com
+    //And here are a few examples of strings that this regex would not consider to be URLs:
+    // https://www.example.com.
+    // https://www.example.com!
+    // https://www.example.com,
+    // https://www.example.com...
+    // https://www..example.com
+    let urlRegex = /(https?:\/\/[^\s\/)]+(\/[^\s)]*)?)/g;
 
     text = text.replace(urlRegex, function(url) {
         return '<a href="' + url + '" target="_blank">' + url + '</a>';
     });
 
+
+
+
+    let twitterHandleRegex = /(@[a-zA-Z0-9_]{1,15})/g;
     text = text.replace(twitterHandleRegex, function(handle) {
         let handleWithoutAt = handle.substring(1);
         return '<a href="https://twitter.com/' + handleWithoutAt + '" target="_blank">' + handle + '</a>';
     });
 
+    let twitterHashtagRegex = /(#[a-zA-Z0-9_]+)/g;
     text = text.replace(twitterHashtagRegex, function(hashtag) {
         let hashtagWithoutHash = encodeURIComponent(hashtag.substring(1));
         return '<a href="https://twitter.com/hashtag/' + hashtagWithoutHash + '" target="_blank">' + hashtag + '</a>';
@@ -57,6 +74,24 @@ function createSuggestionElement(suggestionObj) {
 }
 
 
+// This needs to be out of the addEventListener("DOMContentLoaded") so the
+// custom context menu will not load if there are suggestions in the local storage
+// that need to be loaded.
+// Get Saved Suggestions from local storage if there before anything else.
+chrome.storage.local.get("savedSuggestions", function (data) {
+    console.log(data);
+    const suggestions = data.savedSuggestions || [];
+    const suggestionsContainer = document.getElementById("suggestions-container");
+    suggestions.forEach(suggestionObj => {
+        const suggestionElement = createSuggestionElement(suggestionObj);
+        suggestionsContainer.appendChild(suggestionElement);
+        // Call Prism.highlightAll() after the content has been added to the DOM
+        Prism.highlightAll();
+    });
+
+});
+
+
 
 function displaySuggestions(inputTextObj, suggestions) {
     const suggestionsContainer = document.getElementById("suggestions-container");
@@ -70,6 +105,8 @@ function displaySuggestions(inputTextObj, suggestions) {
         const suggestionElement = createSuggestionElement(suggestionObj);
         suggestionsContainer.appendChild(suggestionElement);
     }
+
+    refreshTokenCount();
 
     // Call Prism.highlightAll() after the content has been added to the DOM
     Prism.highlightAll();

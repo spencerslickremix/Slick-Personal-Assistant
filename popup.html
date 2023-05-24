@@ -9,7 +9,7 @@
 <body class="dark-mode">
 <div id="custom-context-menu">
     <div class="saved-prompts-list">
-        <div id="saved-custom-prompts-header">Saved Custom Prompts</div>
+        <div id="saved-custom-prompts-header">Saved Prompts</div>
     </div>
     <ul><!-- custom prompts are inserted here via js --></ul>
 </div>
@@ -64,7 +64,7 @@
     </ul>
 </div>
 
-<div class="header"><span class="slickremix-logo"></span><span class="slickremix-title">Your Personal Automated Assistant</span>
+<div class="header"><a href="https://slickremix.com" target="_blank"><span class="slickremix-logo"></span></a><span class="suggestionsLink slickremix-title">Your Personal Automated Assistant</span>
     <div class="hamburger-menu">
         <span></span>
         <span></span>
@@ -81,12 +81,13 @@
                       placeholder="Type your text here...">Is this working, only give one word.</textarea>
             <button id="submit-button" class="submit-button-suggestions">Get Suggestions</button>
             <button id="clear-button" class="submit-button-suggestions">Clear</button>
+            <span id="token-count" class="settingsLink">Token count: 0</span>
         </div>
     </div>
     <div id="settings-tab" class="tabcontent">
         <div class="content">
             <h3>Settings Options</h3>
-            <p>To get started, add an API Key below. If you don't have one, you can sign up for Free to gain your <a href="https://platform.openai.com/account/api-keys" target="_blank">API Key from OpenAI</a>. After adding your API Key, click the menu in the top right corner and choose <span id="customPromptsLink">Custom Prompts</span>; otherwise, click <span id="suggestionsLink">Suggestions</span>.</p>
+            <p>To get started, add an API Key below. If you don't have one, you can sign up for Free to gain your <a href="https://platform.openai.com/account/api-keys" target="_blank">API Key from OpenAI</a>. After adding your API Key, click the menu in the top right corner and choose <span id="customPromptsLink">Custom Prompts</span>; otherwise, click <span class="suggestionsLink">Suggestions</span>.</p>
 
             <form id="settings-form">
                 <div class="settings-wrap">
@@ -103,12 +104,12 @@
                 <div class="settings-wrap">
                     <label for="max-tokens">
                         <div class="info-icon material-icons tooltipped"
-                             data-tooltip="The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per prompt.">
+                             data-tooltip="The maximum number of tokens (words or word pieces) in the generated text. 4097 is the maximum allowed per request. Keep in mind that also includes the prompt you include before the response is received. ">
                             info
                         </div>
                         Max Tokens
                     </label>
-                    <input type="text" id="max-tokens" name="max-tokens" placeholder="250. Max 4097">
+                    <input type="text" id="max-tokens" name="max-tokens" placeholder="2000. Max 4000">
                 </div>
 
                 <div class="settings-wrap">
@@ -135,7 +136,7 @@
 
                 <label for="temperature">
                     <div class="info-icon material-icons tooltipped"
-                         data-tooltip="Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text.">
+                         data-tooltip="Controls the randomness of the generated text. Higher values (e.g., 1.0) result in more creative output, while lower values (e.g., 0.1) produce more coherent text. A good middle ground for being creative is 0.7.">
                         info
                     </div>
                     Temperature
@@ -253,6 +254,8 @@
 <script src="layout/js/popup.js"></script>
 <script src="layout/js/loading-suggestions.js"></script>
 <script src="layout/js/share.js"></script>
+<script src="layout/js/prompts-menu.js"></script>
+<script src="layout/js/token-count.js"></script>
 
 </body>
 </html>
