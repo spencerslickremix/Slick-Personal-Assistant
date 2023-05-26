@@ -150,29 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Get the active tab
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        const activeTab = tabs[0];
-
-        // Execute the contentScript.js file in the active tab
-        chrome.scripting.executeScript(
-            {
-                target: { tabId: activeTab.id },
-                files: ["contentScript.js"]
-            },
-            function() {
-                getSelectedTextFromActiveTab();
-            }
-        );
-    });
-
-    // Add a message listener to handle the "textCopied" message from the content script
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        if (request.action === "textCopied") {
-            adjustTextarea(); // Adjust the textarea height when the "textCopied" message is received
-        }
-    });
-
 
     // Define the "adjustTextarea" function to resize the textarea
     const textarea = document.querySelector('#input-text');
@@ -360,6 +337,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log('Saved suggestions cleared.');
             });
 
+            // Also clear the total token count in local storage
+            chrome.storage.local.remove('totalTokenCount', function() {
+                console.log('Total token count cleared.');
+            });
+
             // Clear conversation and reset token count
             chrome.runtime.sendMessage({ action: 'clearConversationAndTokenCount' }, function(response) {
                 console.log(response.message);
@@ -369,11 +351,40 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
+
     // Scroll to the bottom of the suggestionsContainer
     setTimeout(() => {
         const suggestionsContainer = document.getElementById("suggestions-container");
         suggestionsContainer.scrollTop = suggestionsContainer.scrollHeight;
     }, 0);
+
+
+
+    // Get the active tab
+    // Additional Script selected text in a tab and copy/paste it back.
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const activeTab = tabs[0];
+
+        // Execute the contentScript.js file in the active tab
+        chrome.scripting.executeScript(
+            {
+                target: { tabId: activeTab.id },
+                files: ["layout/js/selected-text/contentScript.js"]
+            },
+            function() {
+                getSelectedTextFromActiveTab();
+            }
+        );
+    });
+
+    // Add a message listener to handle the "textCopied" message from the content script
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === "textCopied") {
+            adjustTextarea(); // Adjust the textarea height when the "textCopied" message is received
+        }
+    });
+
 
 
 }); // End addEventListener("DOMContentLoaded")
@@ -546,45 +557,5 @@ function sendMessageToBackground(text, message, cancelSignal) {
                 reject(new Error('Request canceled'));
             });
         }
-    });
-}
-
-function getSelectedTextFromActiveTab() {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, { action: "getSelectedText" }, (response) => {
-            // Check if response exists before trying to trim it
-            if (response && response.trim() !== "") {
-                const inputText = document.getElementById("input-text");
-                inputText.value = response + '\n\n' + 'STOP: ';
-
-                // Check if there are any suggestions in the suggestions-container
-                const suggestionsContainer = document.getElementById("suggestions-container");
-                const hasSuggestions = suggestionsContainer.childElementCount > 0;
-
-                // Check if the input-text field is empty
-                const inputTextEmpty = !inputText.value || inputText.value.trim() === "";
-
-                if (!hasSuggestions && inputTextEmpty) {
-                    showCustomContextMenu();
-                } else {
-                    const customContextMenu = document.getElementById("custom-context-menu");
-                    customContextMenu.style.display = "none";
-                }
-            }
-        });
-    });
-}
-
-
-
-function replaceSelectedTextOnActiveTab(replacementText) {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, { action: 'replaceSelectedText', replacementText }, (response) => {
-            if (!response.replaced) {
-                copyToClipboard(replacementText);
-            }
-        });
     });
 }

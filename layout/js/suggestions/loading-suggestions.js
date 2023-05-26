@@ -19,9 +19,6 @@ function urlify(text) {
         return '<a href="' + url + '" target="_blank">' + url + '</a>';
     });
 
-
-
-
     let twitterHandleRegex = /(@[a-zA-Z0-9_]{1,15})/g;
     text = text.replace(twitterHandleRegex, function(handle) {
         let handleWithoutAt = handle.substring(1);
@@ -79,34 +76,67 @@ function createSuggestionElement(suggestionObj) {
 // that need to be loaded.
 // Get Saved Suggestions from local storage if there before anything else.
 chrome.storage.local.get("savedSuggestions", function (data) {
+
     console.log(data);
     const suggestions = data.savedSuggestions || [];
+    let totalTokenCount = 0;
     const suggestionsContainer = document.getElementById("suggestions-container");
     suggestions.forEach(suggestionObj => {
         const suggestionElement = createSuggestionElement(suggestionObj);
         suggestionsContainer.appendChild(suggestionElement);
         // Call Prism.highlightAll() after the content has been added to the DOM
         Prism.highlightAll();
-    });
 
+        console.log("Current suggestion tokens: ", suggestionObj.tokens);
+
+        // Add the token count of the current suggestion to the total token count
+        totalTokenCount += suggestionObj.tokens;
+    });
+    // Now totalTokenCount contains the sum of tokens of all saved suggestions
+    console.log(totalTokenCount);
+    // Find the HTML element where the total token count will be displayed
+    const totalTokenCountElement = document.getElementById("token-count");
+
+    // Update its text content
+    totalTokenCountElement.textContent = `Total Tokens: ${totalTokenCount}`;
 });
+
+
 
 
 
 function displaySuggestions(inputTextObj, suggestions) {
     const suggestionsContainer = document.getElementById("suggestions-container");
 
+    let totalTokenCount = 0; // Initialize total token count
+
     if (inputTextObj) {
         const inputTextElement = createSuggestionElement(inputTextObj);
         suggestionsContainer.appendChild(inputTextElement);
+        totalTokenCount += inputTextObj.tokens; // Add the token count of the inputTextObj to the total token count
     }
 
     for (const suggestionObj of suggestions) {
         const suggestionElement = createSuggestionElement(suggestionObj);
         suggestionsContainer.appendChild(suggestionElement);
+        totalTokenCount += suggestionObj.tokens; // Add the token count of the suggestionObj to the total token count
     }
 
-    refreshTokenCount();
+    // Save total token count to local storage
+    chrome.storage.local.set({ totalTokenCount: totalTokenCount }, function() {
+
+        // Testing
+        // console.log("Total token count saved to local storage: " + totalTokenCount);
+
+        refreshTokenCount();  // Move the call to refreshTokenCount here
+
+        if (chrome.runtime.lastError) {
+            console.log("Runtime error: ", chrome.runtime.lastError);
+        } else {
+            // Testing
+            // console.log("Total token count saved to local storage: " + totalTokenCount);
+        }
+    });
 
     // Call Prism.highlightAll() after the content has been added to the DOM
     Prism.highlightAll();
@@ -119,17 +149,30 @@ function displaySuggestions(inputTextObj, suggestions) {
 
         // Add input text to existingSuggestions
         if (inputTextObj) {
+            inputTextObj.tokens = inputTextObj.text.split(" ").length;
             existingSuggestions.push(inputTextObj);
         }
 
         // Add all new suggestions to existingSuggestions
         suggestions.forEach(suggestionObj => {
+            suggestionObj.tokens = suggestionObj.text.split(" ").length;
             existingSuggestions.push(suggestionObj);
         });
 
         // Save the updated list back to storage
         chrome.storage.local.set({ savedSuggestions: existingSuggestions }, function () {
             console.log("Suggestions saved.");
+            // Update total token count
+            let totalTokenCount = 0;
+            existingSuggestions.forEach(suggestionObj => {
+                totalTokenCount += suggestionObj.tokens;
+            });
+            // Save the total token count in the local storage
+            chrome.storage.local.set({ totalTokenCount: totalTokenCount }, function() {
+                // Testing
+                // console.log("Total token count saved to local storage: " + totalTokenCount);
+                refreshTokenCount(); // Refresh the count after it's saved
+            });
         });
     });
 

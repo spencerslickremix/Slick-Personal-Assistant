@@ -1,6 +1,10 @@
 // Define your token count at the top of the script
 let tokenCount = 0;
 
+// 4/25/23: Need to revisit this and dig deeper into seeing
+// if we are actually removing suggestion to be able to keep the conversation going.
+// at some point the conversation cannot continue if it exceeds 4097 tokens.
+// seems like I need to make an option to save the conversation and or something...
 // Define the token counting function
 function countTokens(text) {
     let wordCount = text.split(' ').length;
@@ -91,7 +95,12 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
     if (data.choices) {
         let suggestionResponses = data.choices.map((choice) => {
             let messageContent = choice.message.content.trim();
-            conversation.push({role: "assistant", content: messageContent, tokens: countTokens(messageContent)});
+            let tokens = countTokens(messageContent);
+            conversation.push({role: "assistant", content: messageContent, tokens: tokens});
+
+            // Notify loading-suggestions.js that a new suggestion has been added
+            chrome.runtime.sendMessage({ action: "newSuggestionAdded", tokens: tokens });
+
             return messageContent;
         });
         return suggestionResponses;
@@ -139,7 +148,4 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         return true;
     }
 
-    if (request.action === "getTokenCount") {
-        sendResponse({tokenCount: tokenCount});
-    }
 });
