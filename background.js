@@ -119,7 +119,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     const suggestions = await getSuggestionsFromApi(
                         apiKey,
                         request.text,
-                        settings.maxTokens || 50,
+                        settings.maxTokens || 2000,
                         settings.n || 1,
                         settings.stop || null,
                         settings.temperature || 0.1,
