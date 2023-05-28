@@ -10,8 +10,8 @@ if (!window.hasRunContentScript) {
         if (request.action === "getSelectedText") {
             const selectedText = window.getSelection().toString();
 
-            console.log('Runtime.onMessage get selected text' );
-            console.log( selectedText );
+            //console.log('Runtime.onMessage get selected text' );
+            //console.log( selectedText );
 
             chrome.runtime.sendMessage({ action: "textCopied" });
 

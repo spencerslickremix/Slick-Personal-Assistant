@@ -1,0 +1,65 @@
+.header {
+    background-color: #f91980;
+}
+a {
+    color:#f91980;
+}
+.tablinks:hover:not(.active) {
+    background-color: #f91980;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #f91980;
+    -webkit-box-shadow: 0 1px 0 0 #f91980;
+    box-shadow: 0 1px 0 0 #f91980;
+}
+
+.settings-form input:focus {
+    border-color: #f91980;
+    box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
+}
+
+
+button {
+    background-color: #f91980;
+}
+
+.saved-prompts-list {
+    background: #f91980;
+}
+
+#font-size::-webkit-slider-runnable-track {
+    background: #f91980;
+}
+
+.settings-menu li.active {
+    background: #f91980;
+}
+
+input[type=range]+.thumb {
+    background-color: #f91980;
+}
+
+#font-size::-webkit-slider-runnable-track {
+    background: #f91980;
+}
+
+#customPromptsLink, .suggestionsLink {
+    color: #f91980;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: #f91980 !important;
+}
+
+#custom-context-menu li:hover {
+    background-color: #f91980;
+}
+
+textarea:focus {
+    border-color: #e31172;
+}
+
+button:hover, button:focus {
+    background-color: #e31172;
+}

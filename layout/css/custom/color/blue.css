@@ -1,0 +1,66 @@
+.header {
+    background-color: #005cb9;
+}
+a {
+    color: #197de3;
+}
+.tablinks:hover:not(.active) {
+    background-color: #005cb9;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #005cb9;
+    -webkit-box-shadow: 0 1px 0 0 #005cb9;
+    box-shadow: 0 1px 0 0 #005cb9;
+}
+
+.settings-form input:focus {
+    border-color: #005cb9;
+    box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
+}
+
+
+button {
+    background-color: #005cb9;
+}
+
+.saved-prompts-list {
+    background: #005cb9;
+}
+
+#font-size::-webkit-slider-runnable-track {
+    background: #005cb9;
+}
+
+.settings-menu li.active {
+    background: #005cb9;
+}
+
+input[type=range]+.thumb {
+    background-color: #005cb9;
+}
+
+#font-size::-webkit-slider-runnable-track {
+    background: #005cb9;
+}
+
+#customPromptsLink, .suggestionsLink {
+    color: #187de3;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: #005cb9 !important;
+}
+
+#custom-context-menu li:hover {
+    background-color: #005cb9;
+}
+
+textarea:focus {
+    border-color: #0071ed;
+    box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
+}
+
+button:hover, button:focus {
+    background-color: #0071ed;
+}

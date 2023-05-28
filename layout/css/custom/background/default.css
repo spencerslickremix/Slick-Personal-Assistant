@@ -1,0 +1,57 @@
+.header {
+    color: #ffffff;
+}
+.switch-description {
+    color: #686767;
+}
+.tabcontent p {
+    color: #989696;
+}
+.suggestionsLink.slickremix-title {
+    color: #ffffff;
+}
+span.slickremix-logo:before {
+    color: #f0f0f0;
+}
+label {
+    color: #929292 !important;
+}
+.tab {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #e0e0e0;
+}
+.settings-content {
+    background-color: #fff;
+}
+.suggestion {
+    background: #f7f7f7;
+}
+#suggestions-tab .content {
+    background: #f7f7f7;
+}
+textarea {
+    border: 1px solid #e0e0e0;
+    color:#444444;
+}
+.copied-overlay {
+    color: #fff;
+}
+.dot {
+    background-color: #939393;
+}
+#githubUrlContainer .helper-text {
+    color: #989696
+}
+.switch-wrap {
+    background: #f7f7f7;
+}
+.prompt-wrap {
+    box-shadow: 1px 2px 20px 1px #e3dfdf85;
+    background: ffffff;
+}
+.settings-menu li {
+    background: #0e0e0e;
+}
+#custom-context-menu {
+    background-color: #222222;
+}

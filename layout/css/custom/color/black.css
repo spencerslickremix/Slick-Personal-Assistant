@@ -1,0 +1,105 @@
+.header {
+    background-color: #121212;
+}
+a, .default-mode.black-color a {
+    color: #020202;
+}
+.dark-mode a, .twitter-mode a,
+.darker-mode a, .twitter-mode a{
+    color:#fefefe
+}
+
+.tablinks:hover:not(.active) {
+    background-color: #000000;
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #000000;
+    -webkit-box-shadow: 0 1px 0 0 #000000;
+    box-shadow: 0 1px 0 0 #000000;
+}
+
+.settings-form input:focus {
+    border-color: #000000;
+    box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
+}
+
+button {
+    background-color: #1a1a1a;
+}
+.darker-mode .content button.submit-button-suggestions {
+    background-color: #000000;
+}
+.darker-mode .content button {
+    background-color: #1a1a1a;
+}
+.saved-prompts-list {
+    background: #1a1a1a;
+}
+.default-mode .saved-prompts-list a {
+    color: #FFFFFF;
+}
+#font-size::-webkit-slider-runnable-track {
+    background: #000000;
+}
+
+.darker-mode .settings-menu li {
+    background: #1a1a1a;
+}
+
+.settings-menu li.active {
+    background: #000000;
+}
+
+.darker-mode .settings-menu li.active {
+    background: #141414;
+}
+
+input[type=range]+.thumb {
+    background-color: #000000;
+}
+
+#font-size::-webkit-slider-runnable-track {
+    background: #000000;
+}
+
+#customPromptsLink, .suggestionsLink {
+    color: #444444;
+}
+.twitter-mode #customPromptsLink,
+.twitter-mode .suggestionsLink,
+.black-mode #customPromptsLink,
+.black-mode .suggestionsLink,
+.dark-mode #customPromptsLink,
+.dark-mode .suggestionsLink,
+.darker-mode #customPromptsLink,
+.darker-mode .suggestionsLink{
+    color: #ffffff;
+    font-weight:bold;
+}
+.default-mode #customPromptsLink,
+.default-mode .suggestionsLink{
+    color: #000000;
+}
+.default-mode .header .suggestionsLink,
+.dark-mode .header .suggestionsLink,
+.darker-mode .header .suggestionsLink{
+    color: #e8e6e6;
+    font-weight:normal;
+}
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: #000000 !important;
+}
+
+#custom-context-menu li:hover {
+    background-color: #1a1a1a;
+}
+
+textarea:focus {
+    border-color: #777777;
+    box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
+}
+
+button:hover, button:focus {
+    background-color: #3b3b3b;
+}
