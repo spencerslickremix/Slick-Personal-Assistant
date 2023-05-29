@@ -10,8 +10,7 @@ class Popup {
 
         document.addEventListener("DOMContentLoaded", () => {
 
-
-
+            window.MyAssistant.updates.checkForUpdates();
             window.MyAssistant.tokenCount.refreshTokenCount();
             window.MyAssistant.promptsMenu.updateCustomContextMenuOptions();
 
@@ -464,9 +463,20 @@ class Popup {
     registerDocumentEvents() {
         window.addEventListener('DOMContentLoaded', (event) => {
 
+            const updateNotification = document.getElementsByClassName('clickUpdateNotification');
             const customPromptsLink = document.getElementById('customPromptsLink');
             const suggestionsLink = document.getElementsByClassName('suggestionsLink');
             const settingsLink = document.getElementsByClassName('settingsLink');
+
+            if (updateNotification && updateNotification.length > 0) {
+                for (let i = 0; i < updateNotification.length; i++) {
+                    updateNotification[i].addEventListener('click', () => {
+                        this.openTab("changelog-tab");
+                        document.querySelector('[data-tab="changelog-tab"]').classList.add("active");
+                        window.MyAssistant.updates.setupNotificationClickListener();
+                    });
+                }
+            }
 
             if (customPromptsLink) {
                 customPromptsLink.addEventListener('click', () => {

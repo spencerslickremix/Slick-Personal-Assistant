@@ -714,3 +714,24 @@ input[type=range]+.thumb {
     position: absolute;
     top:-32px !important;
 }
+#changelog-container {
+    white-space: pre-wrap;
+    font-family: arial, 'sans-serif';
+    font-size:1.1em;
+    padding:25px 15px;
+}
+#updateNotification {
+    color:#ffffff;
+    opacity: 0;
+    display:block;
+    position:absolute;
+    top:19px;
+    right:60px;
+    cursor:pointer;
+    transition: 1s;
+}
+.fade-in {
+    opacity: 0;
+    transition: opacity 0.5s;
+    opacity: 1;
+}

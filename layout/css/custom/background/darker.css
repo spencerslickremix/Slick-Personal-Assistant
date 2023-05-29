@@ -73,3 +73,15 @@ textarea {
 #custom-context-menu {
     background-color: #000000;
 }
+#changelog-container {
+    color: #fff;
+    border-top: 1px dashed #4f5052;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #000000 inset !important;
+    /*use inset box-shadow to cover background-color*/
+    -webkit-text-fill-color: #ececf1 !important;
+    /*use text fill color to cover font color*/
+}

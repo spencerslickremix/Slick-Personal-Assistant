@@ -56,6 +56,10 @@ input[type=range]+.thumb {
     background-color: #00ba7c;
 }
 
+#changelog-container {
+    border-top: 2px dashed #00ba7c;
+}
+
 textarea:focus {
     border-color: #0dda94;
 }
@@ -63,4 +67,3 @@ textarea:focus {
 button:hover, button:focus {
     background-color: #0dda94;
 }
-

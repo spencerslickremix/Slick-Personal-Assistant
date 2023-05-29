@@ -22,6 +22,26 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({ conversation: [] });
 });
 
+// Only use this to test the notification notice.
+// The version should be one less that the version in the manifest file.
+/*chrome.storage.sync.set({ lastNotifiedVersion: '0.0.2', notificationClicked: 'no' }, () => {
+    console.log('Version set in storage and notification option stored');
+});*/
+/*chrome.storage.sync.get("lastNotifiedVersion", function(data) {
+    console.log('Last notified version:', data.lastNotifiedVersion);
+});
+chrome.storage.sync.get("notificationClicked", function(data) {
+    console.log('Was notification clicked:', data.notificationClicked);
+});*/
+
+// Update the last notified version in storage when the extension is updated
+chrome.runtime.onInstalled.addListener(details => {
+    if (details.reason === "update") {
+        const currentVersion = chrome.runtime.getManifest().version;
+        chrome.storage.sync.set({ lastNotifiedVersion: currentVersion });
+    }
+});
+
 // Update the conversation in the storage whenever it changes
 function updateConversation(convo) {
     chrome.storage.sync.set({ conversation: convo });
@@ -147,5 +167,62 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         sendResponse({ message: "Conversation and token count cleared." });
         return true;
     }
+
+
+
+
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === "fetchChangelog") {
+            fetchChangelog()
+                .then(changelog => sendResponse({changelog: changelog}))
+                .catch(error => sendResponse({error: error.message}));
+            return true;  // Indicate that we will send a response asynchronously
+        }
+        // Handle other messages...
+    });
+
+
+
+
+
+    function fetchChangelog(attempt = 1) {
+        const maxAttempts = 3;
+        const repo = 'https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/';
+
+        return new Promise((resolve, reject) => {
+            fetch(repo + 'changelog.txt')
+                .then(response => {
+                    if (response.status === 404) {
+                        throw new Error('The changelog could not be found. Please check the file path.');
+                    } else if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(changelog => {
+                    resolve(changelog);
+                })
+                .catch(error => {
+                    if (error.message.includes('changelog could not be found')) {
+                        // If the changelog was not found, reject the promise immediately
+                        reject(error);
+                    } else if (attempt < maxAttempts) {
+                        // If the fetch failed for a different reason and we haven't reached the max number of attempts, try again
+                        fetchChangelog(attempt + 1).then(resolve).catch(reject);
+                    } else {
+                        // If we've reached the max number of attempts, reject the promise
+                        reject(error);
+                    }
+                });
+        });
+    }
+
+
+
+
+
+
+
+
 
 });

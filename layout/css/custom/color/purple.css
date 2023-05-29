@@ -52,6 +52,10 @@ input[type=range]+.thumb {
     background-color: #7856ff !important;
 }
 
+#changelog-container {
+    border-top: 2px dashed #7856ff;
+}
+
 #custom-context-menu li:hover {
     background-color: #7856ff;
 }

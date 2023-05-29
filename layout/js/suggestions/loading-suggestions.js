@@ -58,7 +58,17 @@ class LoadingSuggestions {
 
         // Add an event listener to the suggestion element
         suggestion.addEventListener('click', (e) => {
-            window.MyAssistant.selectedText.replaceSelectedTextOnActiveTab(suggestionObj.text);
+
+            let selectedText = window.getSelection().toString();
+
+            // If user selected some text, copy that
+            if (selectedText.length > 0) {
+                window.MyAssistant.selectedText.replaceSelectedTextOnActiveTab(selectedText);
+            }
+            // If no text is selected, copy all the text within the div
+            else {
+                window.MyAssistant.selectedText.replaceSelectedTextOnActiveTab(suggestionObj.text);
+            }
             this.showCopiedOverlay(e.target);
         });
 
