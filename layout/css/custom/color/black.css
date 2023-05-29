@@ -39,7 +39,7 @@ button {
 .default-mode .saved-prompts-list a {
     color: #FFFFFF;
 }
-#font-size::-webkit-slider-runnable-track {
+#font-size::-webkit-slider-runnable-track, #popup-size::-webkit-slider-runnable-track {
     background: #000000;
 }
 
@@ -59,7 +59,7 @@ input[type=range]+.thumb {
     background-color: #000000;
 }
 
-#font-size::-webkit-slider-runnable-track {
+#font-size::-webkit-slider-runnable-track, #popup-size::-webkit-slider-runnable-track {
     background: #000000;
 }
 

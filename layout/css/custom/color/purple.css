@@ -28,7 +28,7 @@ button {
     background: #7856ff;
 }
 
-#font-size::-webkit-slider-runnable-track {
+#font-size::-webkit-slider-runnable-track, #popup-size::-webkit-slider-runnable-track {
     background: #7856ff;
 }
 
@@ -40,7 +40,7 @@ input[type=range]+.thumb {
     background-color: #7856ff;
 }
 
-#font-size::-webkit-slider-runnable-track {
+#font-size::-webkit-slider-runnable-track, #popup-size::-webkit-slider-runnable-track {
     background: #7856ff;
 }
 

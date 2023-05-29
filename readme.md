@@ -34,7 +34,7 @@ Below are some use cases and also a breakdown of the Custom Options, Settings an
 ## :wrench: Custom Options
 1. Select text on the web page and click the pinned extension; the selected text will automatically be pasted to the textarea in the chrome extension popup.
 2. I added a STOP: after the pasted text so you can easily prompt your request, or not.
-3. Once you click the "Get Suggestions" button, one or more suggestions will appear.
+3. Once you click the "Submit" button, one or more suggestions will appear.
 4. You can then click on a suggestion, and the text from that suggestion will be copied in place of the selected text on the webpage if it's a content editable area.
 5. The text will also be added to the clipboard, allowing you to paste it in another tab or anywhere.
 6. **Bonus:** Click the Twitter icon that appears in the top right of a suggestion(s), and it will open Twitter so you can share the suggestion.

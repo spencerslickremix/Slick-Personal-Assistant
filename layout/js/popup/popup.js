@@ -174,9 +174,10 @@ class Popup {
                 }, 100); // delay of 100ms, adjust as needed
             }
 
+            window.MyAssistant.customColors.settingsFontSize();
+            window.MyAssistant.customColors.settingsPopupSize();
             window.MyAssistant.customColors.settingsCustomColors();
             window.MyAssistant.customColors.settingsButtonColors();
-            window.MyAssistant.customColors.settingsFontSize();
 
             const inputText = document.getElementById("input-text");
 
@@ -221,6 +222,7 @@ class Popup {
                     // Remove active class from other tablinks
                     document.querySelectorAll(".settings-menu .tablinks").forEach(t => t.classList.remove("active"));
                     event.target.closest("li").classList.add("active");
+                    window.MyAssistant.customColors.addBodyClass();
                 });
             });
 
@@ -250,7 +252,7 @@ class Popup {
             const submitButton = document.getElementById("submit-button");
             if (submitButton) {
                 submitButton.addEventListener("click", async () => {
-                    if (submitButton.innerText === "Get Suggestions") {
+                    if (submitButton.innerText === "Submit") {
                         const inputText = document.getElementById("input-text").value;
                         if (inputText.trim() === "") {
                             window.MyAssistant.loadingSuggestions.showOverlay("Type text below...");
@@ -280,7 +282,7 @@ class Popup {
 
                         } finally {
                             window.MyAssistant.loadingSuggestions.hideLoadingAnimation();
-                            submitButton.innerText = "Get Suggestions";
+                            submitButton.innerText = "Submit";
                             document.getElementById("input-text").value = "";
                         }
                     } else {
@@ -412,6 +414,7 @@ class Popup {
                 // If api-key is blank, open settings-tab
                 this.openTab("settings-tab");
                 document.querySelector('[data-tab="settings-tab"]').classList.add("active");
+                window.MyAssistant.customColors.addBodyClass("active-missing-api-key-exception");
             } else {
                 // If api-key has some value, open suggestions-tab
                 this.openTab("suggestions-tab");
@@ -421,7 +424,7 @@ class Popup {
     }
 
 
-    // Add this function to copy text to the clipboard
+    // Copy text to the clipboard
     copyToClipboard(text) {
         const el = document.createElement('textarea');
         el.value = text;
@@ -482,6 +485,7 @@ class Popup {
                 customPromptsLink.addEventListener('click', () => {
                     this.openTab("custom-context-menu-settings-tab");
                     document.querySelector('[data-tab="custom-context-menu-settings-tab"]').classList.add("active");
+                    window.MyAssistant.customColors.addBodyClass();
                 });
             }
 
@@ -490,6 +494,7 @@ class Popup {
                     suggestionsLink[i].addEventListener('click', () => {
                         this.openTab("suggestions-tab");
                         document.querySelector('[data-tab="suggestions-tab"]').classList.add("active");
+                        window.MyAssistant.customColors.addBodyClass();
                     });
                 }
             }
@@ -499,6 +504,7 @@ class Popup {
                     settingsLink[i].addEventListener('click', () => {
                         this.openTab("settings-tab");
                         document.querySelector('[data-tab="settings-tab"]').classList.add("active");
+                        window.MyAssistant.customColors.addBodyClass();
                     });
                 }
             }

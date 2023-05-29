@@ -3,6 +3,7 @@ class CustomColors {
         // Initialize the darker(black) theme and button color
         this.currentTheme = "darker";
         this.currentButtonColor = "blue";
+        this.addBodyClass();
     }
     settingsCustomColors() {
         var themeOptions = document.getElementsByClassName('theme-option');
@@ -130,7 +131,16 @@ class CustomColors {
 
     settingsFontSize() {
         var fontSizeSlider = document.getElementById('font-size');
+        var fontSizeSpan = document.getElementById('font-size-span');
+
+        // Event listener for when the slider is being moved
         fontSizeSlider.addEventListener('input', function() {
+            var fontSize = this.value;
+            fontSizeSpan.textContent = fontSize; // Update display as slider is moved
+        });
+
+        // Event listener for when the slider is released
+        fontSizeSlider.addEventListener('mouseup', function() {
             var fontSize = this.value;
             chrome.storage.sync.set({fontSize: fontSize}, function() {
                 console.log('Font size is ' + fontSize);
@@ -142,12 +152,62 @@ class CustomColors {
             if (data.fontSize) {
                 window.MyAssistant.customColors.applyFontSize(data.fontSize);
                 fontSizeSlider.value = data.fontSize;
+                fontSizeSpan.textContent = data.fontSize; // Add size to font-size-span div when loading stored value
             }
         });
     }
 
     applyFontSize(fontSize) {
         document.documentElement.style.setProperty('--font-size', fontSize + "%");
+    }
+
+
+
+    settingsPopupSize() {
+        var popupSizeSlider = document.getElementById('popup-size');
+        var popupWidthSpan = document.getElementById('popup-width-span');
+
+        // Event listener for when the slider is being moved
+        popupSizeSlider.addEventListener('input', function() {
+            var popupSize = this.value;
+            popupWidthSpan.textContent = popupSize; // Update the display as the slider is being moved
+        });
+
+        // Event listener for when the slider is released
+        popupSizeSlider.addEventListener('mouseup', function() {
+            var popupSize = this.value;
+            chrome.storage.sync.set({popupSize: popupSize}, function() {
+                console.log('Popup size is ' + popupSize);
+                window.MyAssistant.customColors.applyPopupSize(popupSize);
+            });
+        });
+
+        chrome.storage.sync.get('popupSize', function(data) {
+            if (data.popupSize) {
+                window.MyAssistant.customColors.applyPopupSize(data.popupSize);
+                popupSizeSlider.value = data.popupSize;
+                popupWidthSpan.textContent = data.popupSize;
+            }
+        });
+    }
+
+    applyPopupSize(popupSize) {
+        document.body.style.setProperty('width', popupSize + "px");
+    }
+
+    addBodyClass(apiKeyException){
+            const activeTabLink = document.querySelector('.settings-menu-option.tablinks.active');
+
+            if (activeTabLink || apiKeyException === "active-missing-api-key-exception") {
+                let apiKeyExceptionCheck =  apiKeyException === "active-missing-api-key-exception" ? 1000 : 0;
+                setTimeout(function() {
+                    document.body.classList.add('settings-options');
+                }, apiKeyExceptionCheck); // Time is in milliseconds, so 5000 ms equals 5 seconds
+
+
+            } else {
+                document.body.classList.remove('settings-options');
+            }
     }
 
 }
