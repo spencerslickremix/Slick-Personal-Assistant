@@ -130,7 +130,8 @@ async function getSuggestionsFromApi(apiKey, prompt, maxTokens, n, stop, tempera
     }
 }
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "getSuggestions") {
         if (request.text) {
             fetchApiKey().then(async function (apiKey) {
@@ -170,59 +171,42 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 
 
-
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-        if (request.action === "fetchChangelog") {
-            fetchChangelog()
-                .then(changelog => sendResponse({changelog: changelog}))
-                .catch(error => sendResponse({error: error.message}));
-            return true;  // Indicate that we will send a response asynchronously
-        }
-        // Handle other messages...
-    });
-
-
-
-
-
-    function fetchChangelog(attempt = 1) {
-        const maxAttempts = 3;
-        const repo = 'https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/';
-
-        return new Promise((resolve, reject) => {
-            fetch(repo + 'changelog.txt')
-                .then(response => {
-                    if (response.status === 404) {
-                        throw new Error('The changelog could not be found. Please check the file path.');
-                    } else if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(changelog => {
-                    resolve(changelog);
-                })
-                .catch(error => {
-                    if (error.message.includes('changelog could not be found')) {
-                        // If the changelog was not found, reject the promise immediately
-                        reject(error);
-                    } else if (attempt < maxAttempts) {
-                        // If the fetch failed for a different reason and we haven't reached the max number of attempts, try again
-                        fetchChangelog(attempt + 1).then(resolve).catch(reject);
-                    } else {
-                        // If we've reached the max number of attempts, reject the promise
-                        reject(error);
-                    }
-                });
-        });
+    if (request.action === "fetchChangelog") {
+        fetchChangelog()
+            .then(changelog => sendResponse({changelog: changelog}))
+            .catch(error => sendResponse({error: error.message}));
+        return true;  // Indicate that we will send a response asynchronously
     }
-
-
-
-
-
-
-
-
-
 });
+
+function fetchChangelog(attempt = 1) {
+    const maxAttempts = 3;
+    const repo = 'https://raw.githubusercontent.com/spencerslickremix/Slick-Personal-Assistant/main/';
+
+    return new Promise((resolve, reject) => {
+        fetch(repo + 'changelog.txt')
+            .then(response => {
+                if (response.status === 404) {
+                    throw new Error('The changelog could not be found. Please check the file path.');
+                } else if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(changelog => {
+                resolve(changelog);
+            })
+            .catch(error => {
+                if (error.message.includes('changelog could not be found')) {
+                    // If the changelog was not found, reject the promise immediately
+                    reject(error);
+                } else if (attempt < maxAttempts) {
+                    // If the fetch failed for a different reason and we haven't reached the max number of attempts, try again
+                    fetchChangelog(attempt + 1).then(resolve).catch(reject);
+                } else {
+                    // If we've reached the max number of attempts, reject the promise
+                    reject(error);
+                }
+            });
+    });
+}

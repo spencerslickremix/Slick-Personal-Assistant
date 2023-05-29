@@ -9,6 +9,7 @@ class Updates {
             if (!lastNotifiedVersion || currentVersion !== lastNotifiedVersion || currentVersion !== lastClickedVersion) {
                 document.getElementById('updateNotification').style.opacity = '1';
                 console.log( currentVersion );
+                console.log( lastClickedVersion );
             } else {
                 // If the versions match, hide the update notification
                 document.getElementById('updateNotification').style.opacity = '0';
@@ -18,17 +19,18 @@ class Updates {
     }
 
     setupNotificationClickListener() {
-            // When the notification is clicked, update the last clicked version to the current version
-            const currentVersion = chrome.runtime.getManifest().version;
-            chrome.storage.sync.set({ lastClickedVersion: currentVersion });
-
+        // When the notification is clicked, update the last clicked version to the current version
+        const currentVersion = chrome.runtime.getManifest().version;
+        chrome.storage.sync.set({ lastClickedVersion: currentVersion }, () => {
             // Hide the notification
             document.getElementById('updateNotification').style.opacity = '0';
             document.getElementById('updateNotification').style.pointerEvents = 'none';
 
             // Request the changelog from the background script
             this.fetchChangeLog();
+        });
     }
+
 
 
     fetchChangeLog() {
@@ -45,7 +47,7 @@ class Updates {
         changelogContainer.appendChild(loadingAnimation);
 
         // Request the changelog from the background script
-        chrome.runtime.sendMessage({action: "fetchChangelog"}, function(response) {
+        chrome.runtime.sendMessage({action: "fetchChangelog"}, response => {
             // Remove loading animation
             changelogContainer.removeChild(loadingAnimation);
 
@@ -57,8 +59,9 @@ class Updates {
 
             // Display and fade in changelog text
             changelogContainer.textContent = response.changelog;
-            changelogContainer.classList.add("fade-in");
+            changelogContainer.classList.add("changelog-fade-in");
         });
     }
+
 }
 window.MyAssistant.updates = new Updates();

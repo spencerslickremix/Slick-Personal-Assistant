@@ -452,6 +452,7 @@ textarea {
     list-style: none;
     overflow: auto;
     max-height: 298px;
+    transition: .9s;
 }
 
 #custom-context-menu li {
@@ -624,15 +625,16 @@ script {
 }
 
 .theme-option {
-    width: 65px;
-    height: 65px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    margin-right: 18px;
+    margin-right: 11px;
     cursor: pointer;
     transition:.2s;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .button-color-option {
@@ -645,6 +647,19 @@ script {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
+}
+@media(max-width: 400px){
+    .button-color-option {
+        width: 37px;
+        height: 37px;
+        margin-right: 2px;
+    }
+    .theme-option {
+        margin-right: 5px;
+        width:67px;
+        height:67px;
+    }
 }
 .theme-option{
     border: 1px solid #ffffff3d;
@@ -672,14 +687,17 @@ script {
 .button-color-option.active .material-icons {
     opacity:1;
 }
+.button-color-option .material-icons {
+    font-size:20px;
+}
 
-.font-size-slider {
+.settings-size-slider {
     position: relative;
     height: 25px;
     margin-right: 9px;
 }
 
-#font-size {
+#font-size, #popup-size  {
     width: 100%;
     height: 10px;
     background: transparent;
@@ -688,14 +706,14 @@ script {
     border-radius: 10px !important;
 }
 
-#font-size::-webkit-slider-runnable-track {
+#font-size::-webkit-slider-runnable-track, #popup-size::-webkit-slider-runnable-track {
     width: 100%;
     height: 10px;
     cursor: pointer;
     border-radius: 10px;
 }
 
-#font-size::-webkit-slider-thumb {
+#font-size::-webkit-slider-thumb, #popup-size::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
     background: #f3f3f3;
@@ -713,6 +731,8 @@ script {
 input[type=range]+.thumb {
     position: absolute;
     top:-32px !important;
+    display: none;
+    opacity: 0;
 }
 #changelog-container {
     white-space: pre-wrap;
@@ -730,8 +750,28 @@ input[type=range]+.thumb {
     cursor:pointer;
     transition: 1s;
 }
-.fade-in {
+.changelog-fade-in {
     opacity: 0;
     transition: opacity 0.5s;
     opacity: 1;
+}
+.container {
+    width: 90% !important;
+}
+body.settings-options,
+body.settings-options .header,
+body.settings-options #font-size::-webkit-slider-runnable-track,
+body.settings-options #popup-size::-webkit-slider-runnable-track,
+body.settings-options .switch label input[type=checkbox]:checked + .lever,
+body.settings-options .material-icons{
+    transition:.4s;
+}
+
+body.settings-options .switch-wrap {
+    transition: background-color 0.4s linear;
+}
+
+body.settings-options .switch-wrap .switch-description,
+body.settings-options .switch-wrap label {
+    transition:.03s !important;
 }

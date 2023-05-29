@@ -104,7 +104,7 @@
         <div class="content">
             <textarea id="input-text"
                       placeholder="Type your text here...">Is this working, only give one word.</textarea>
-            <button id="submit-button" class="submit-button-suggestions">Get Suggestions</button>
+            <button id="submit-button" class="submit-button-suggestions">Submit</button>
             <button id="clear-button" class="submit-button-suggestions">Clear</button>
             <span id="token-count" class="settingsLink">Token count: 0</span>
         </div>
@@ -206,10 +206,17 @@
                     </label>
                 </div>
 
+                <div class="switch switch-wrap popup-width-wrap">
+                    <div class="switch-description">Popup Width: <span id="popup-width-span">450</span>px</div>
+                    <div class="settings-size-slider">
+                        <input type="range" id="popup-size" class="settings-slider" min="400" max="750" value="450">
+                    </div>
+                </div>
+
                 <div class="switch switch-wrap">
-                    <div class="switch-description">Font Size</div>
-                    <div class="font-size-slider">
-                        <input type="range" id="font-size" min="100" max="120" value="100">
+                    <div class="switch-description">Font Size: <span id="font-size-span">100</span>%</div>
+                    <div class="settings-size-slider">
+                        <input type="range" id="font-size" class="settings-slider" min="100" max="120" value="100">
                     </div>
                 </div>
 

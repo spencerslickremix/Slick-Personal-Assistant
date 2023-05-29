@@ -65,7 +65,7 @@ textarea {
     background: #1a1a1a;
 }
 .material-tooltip {
-    background:#1a1a1a;
+    background: #2c2c2c;
 }
 .settings-menu li {
     background: #141414;
@@ -84,4 +84,10 @@ select:-webkit-autofill {
     /*use inset box-shadow to cover background-color*/
     -webkit-text-fill-color: #ececf1 !important;
     /*use text fill color to cover font color*/
+}
+#custom-context-menu-settings-tab input:-webkit-autofill,
+#custom-context-menu-settings-tab textarea:-webkit-autofill,
+#custom-context-menu-settings-tab select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset !important;
+    /*use inset box-shadow to cover background-color*/
 }
