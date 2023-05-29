@@ -1,4 +1,4 @@
-= Version 0.0.3 Sunday, May 28th, 2023 =
+= Version 0.0.3 Monday, May 29th, 2023 =
  * New: Settings: Custom font size option.
  * New: Settings: Custom background and color options.
  * New: Settings: Choose the width of the Popup.
