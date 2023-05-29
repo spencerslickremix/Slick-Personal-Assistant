@@ -40,7 +40,7 @@ span.slickremix-logo:before {
     color: #f9f8f8;
 }
 .suggestion.user-input {
-    background: #18293a59;
+    background: #18293a00;
 }
 #suggestions-tab .content {
     background: #18293a;
@@ -72,4 +72,16 @@ textarea {
 }
 #custom-context-menu {
     background-color: #18293a;
+}
+#changelog-container {
+    color: #fff;
+    border-top: 1px dashed #4f5052;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #15202b inset !important;
+    /*use inset box-shadow to cover background-color*/
+    -webkit-text-fill-color: #ffffff !important;
+    /*use text fill color to cover font color*/
 }

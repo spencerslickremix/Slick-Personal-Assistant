@@ -56,6 +56,10 @@ input[type=range]+.thumb {
     background-color: #ffd400;
 }
 
+#changelog-container {
+    border-top: 2px dashed #ffd400;
+}
+
 textarea:focus {
     border-color: #ffe04a;
     box-shadow: 0 0 5px rgba(0, 92, 185, 0.25);
