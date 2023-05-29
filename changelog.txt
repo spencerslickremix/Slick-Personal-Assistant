@@ -3,15 +3,15 @@
  * New: Settings: Custom background and color options.
  * New: Settings: Choose the width of the Popup.
  * New: Suggestions: Added Token Count so users can see how many tokens are used per response. This text will also link you directly to the Settings page for quicker navigation.
- * New: Header: Logo now links to the website and the text "Your Personal Automated Assistant" links to the Suggestions tab for quicker navigation.
- * New: Organized files in there respective folders.
+ * New: Header: The SlickRemix logo now links to the website, and the text "Your Personal Automated Assistant" links to the Suggestions tab for quicker navigation.
+ * New: Organized files in their respective folders.
  * New: Namespaced and classify entire extension.
  * Updated: Select a portion of text from a response to be copied automatically.
  * Updated: Settings description for Max Tokens and Temperature to be more clear.
- * Fixed: Added additional checks to Regex to parse URLs properly. Probably end up adding a library in the future.
+ * Fixed: Added additional checks to Regex to parse URLs properly. We will probably end up adding a library in the future.
  * Fixed: Added error messages to the suggestion list so users know when there is a problem.
- * Fixed: Added GPT-4 specific error message to users know if the API token they have entered will work with GPT-4 if they chose that model.
- * Removed: content_scripts: matches": ["http://*/*", "https://*/*"] & js": ["contentScript.js"]. These options were not needed because I am calling chrome.scripting.executeScript from the popup.js file already so the call was being duplicated.
+ * Fixed: Added GPT-4 specific error message to let users know if the API token they have entered will work with GPT-4 if they chose that model.
+ * Removed: content_scripts: matches": ["http://*/*", "https://*/*"] & js": ["contentScript.js"]. These options were not needed because I am calling chrome.scripting.executeScript from the popup.js file already, so the call was being duplicated.
 
 = Version 0.0.2 Thursday, May 18th, 2023 =
  * New: Replaced model davinci-003 with gpt-3.5-turbo
